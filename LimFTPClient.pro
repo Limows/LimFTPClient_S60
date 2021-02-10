@@ -34,10 +34,24 @@ symbian {
 # CONFIG += mobility
 # MOBILITY +=
 
-SOURCES += main.cpp mainwindow.cpp
-HEADERS += mainwindow.h
-FORMS += mainwindow.ui
-RESOURCES += Resources.rc
+SOURCES += \
+    main.cpp \
+    mainwindow.cpp \
+    paramsdialog.cpp \
+    aboutdialog.cpp
+
+HEADERS += \
+    mainwindow.h \
+    paramsdialog.h \
+    aboutdialog.h
+
+FORMS += \
+    mainwindow.ui \
+    paramsdialog.ui \
+    aboutdialog.ui
+
+RESOURCES += \
+    Resources.rc
 
 # Please do not modify the following two lines. Required for deployment.
 include(deployment.pri)

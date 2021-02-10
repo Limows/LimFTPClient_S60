@@ -1,8 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QTextCodec>
 
+#include <QTextCodec>
 #include <QtCore/QCoreApplication>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -90,5 +91,42 @@ void MainWindow::showExpanded()
 #else
     show();
 #endif
+
+}
+
+void MainWindow::on_ParamsAction_triggered()
+{
+    ParamsDialog *NewParamsDialog = new ParamsDialog();
+
+    NewParamsDialog->showMaximized();
+}
+
+void MainWindow::on_RefreshAction_triggered()
+{
+
+}
+
+void MainWindow::on_HelpAction_triggered()
+{
+    QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
+
+    QMessageBox HelpBox;
+
+    HelpBox.setText(tr("Помощь"));
+    HelpBox.setIcon(QMessageBox::Information);
+    HelpBox.setInformativeText(tr("Для выбора приложения кликните по его названию в списке"));
+
+    HelpBox.exec();
+}
+
+void MainWindow::on_AboutAction_triggered()
+{
+    AboutDialog *NewAboutDialog = new AboutDialog();
+
+    NewAboutDialog->showMaximized();
+}
+
+void MainWindow::on_UpdateAction_triggered()
+{
 
 }

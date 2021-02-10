@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ParamsDialog</class>
+ <widget class="QDialog" name="ParamsDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>240</width>
+    <height>270</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Параметры</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="Resources.rc">
+    <normaloff>:/icons/logo.ico</normaloff>:/icons/logo.ico</iconset>
+  </property>
+  <widget class="QTabWidget" name="tabWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>240</width>
+     <height>241</height>
+    </rect>
+   </property>
+   <property name="tabPosition">
+    <enum>QTabWidget::South</enum>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="DownloadTabPage">
+    <attribute name="title">
+     <string>Загрузка</string>
+    </attribute>
+   </widget>
+   <widget class="QWidget" name="InstallTabPage">
+    <attribute name="title">
+     <string>Установка</string>
+    </attribute>
+   </widget>
+   <widget class="QWidget" name="BufferTabPage">
+    <attribute name="title">
+     <string>Хранилище</string>
+    </attribute>
+   </widget>
+  </widget>
+  <action name="ExitAction">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+   <property name="toolTip">
+    <string>Exit</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="Resources.rc"/>
+ </resources>
+ <connections/>
+</ui>

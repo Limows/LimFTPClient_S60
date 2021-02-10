@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Wed 10. Feb 15:27:51 2021
+** Created: Wed 10. Feb 23:16:29 2021
 **      by: Qt User Interface Compiler version 4.6.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -51,6 +51,7 @@ public:
         MainWindow->setWindowIcon(icon);
         ParamsAction = new QAction(MainWindow);
         ParamsAction->setObjectName(QString::fromUtf8("ParamsAction"));
+        ParamsAction->setCheckable(false);
         RefreshAction = new QAction(MainWindow);
         RefreshAction->setObjectName(QString::fromUtf8("RefreshAction"));
         HelpAction = new QAction(MainWindow);
@@ -63,7 +64,7 @@ public:
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         AppsListView = new QListView(centralWidget);
         AppsListView->setObjectName(QString::fromUtf8("AppsListView"));
-        AppsListView->setGeometry(QRect(0, 30, 240, 181));
+        AppsListView->setGeometry(QRect(0, 30, 240, 180));
         AppsListView->viewport()->setProperty("cursor", QVariant(QCursor(Qt::ArrowCursor)));
         AppsListView->setProperty("isWrapping", QVariant(false));
         label = new QLabel(centralWidget);

@@ -1,4 +1,6 @@
 #include "mainwindow.h"
+#include "paramsdialog.h"
+#include "aboutdialog.h"
 
 #include <QtGui/QApplication>
 

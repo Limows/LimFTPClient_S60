@@ -1,6 +1,9 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "paramsdialog.h"
+#include "aboutdialog.h"
+
 #include <QtGui/QMainWindow>
 
 namespace Ui {
@@ -24,6 +27,17 @@ public:
     void setOrientation(ScreenOrientation orientation);
 
     void showExpanded();
+
+private slots:
+    void on_ParamsAction_triggered();
+
+    void on_RefreshAction_triggered();
+
+    void on_HelpAction_triggered();
+
+    void on_AboutAction_triggered();
+
+    void on_UpdateAction_triggered();
 
 private:
     Ui::MainWindow *ui;

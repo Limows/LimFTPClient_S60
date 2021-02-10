@@ -24,7 +24,7 @@
       <x>0</x>
       <y>30</y>
       <width>240</width>
-      <height>181</height>
+      <height>180</height>
      </rect>
     </property>
     <property name="cursor" stdset="0">
@@ -521,6 +521,9 @@
    <addaction name="RefMenu"/>
   </widget>
   <action name="ParamsAction">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Параметры</string>
    </property>
