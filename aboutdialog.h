@@ -2,6 +2,7 @@
 #define ABOUTDIALOG_H
 
 #include <QDialog>
+#include <QTextCodec>
 
 namespace Ui {
     class AboutDialog;
@@ -13,6 +14,7 @@ class AboutDialog : public QDialog
 
 public:
     explicit AboutDialog(QWidget *parent = 0);
+
     ~AboutDialog();
 
 private slots:

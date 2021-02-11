@@ -5,6 +5,11 @@
 #include "aboutdialog.h"
 
 #include <QtGui/QMainWindow>
+#include <QTextCodec>
+#include <QtCore/QCoreApplication>
+#include <QMessageBox>
+#include <QScreen>
+#include <QDesktopWidget>
 
 namespace Ui {
     class MainWindow;
@@ -21,6 +26,7 @@ public:
     };
 
     explicit MainWindow(QWidget *parent = 0);
+
     virtual ~MainWindow();
 
     // Note that this will only have an effect on Symbian and Fremantle.
@@ -41,6 +47,9 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+private:
+    void Connect();
 };
 
 #endif // MAINWINDOW_H

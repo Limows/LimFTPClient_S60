@@ -14,6 +14,7 @@ class ParamsDialog : public QDialog
     Q_OBJECT
 public:
     explicit ParamsDialog(QWidget *parent = 0);
+
     virtual ~ParamsDialog();
 
 private slots:
@@ -23,10 +24,11 @@ private slots:
 
     void on_OpenDirButton_clicked();
 
-    QString OpenDirDialog();
-
 private:
     Ui::ParamsDialog *ui;
+
+private:
+    QString OpenDirDialog();
 
 };
 

@@ -1,37 +1,22 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include <QTextCodec>
-#include <QtCore/QCoreApplication>
-#include <QMessageBox>
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    /*
-    QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
 
-    QAction *LeftOption = new QAction(tr("Действия"), this);
-    option1->setSoftKeyRole(QAction::PositiveSoftKey);
-    QObject::connect(option1, SIGNAL(triggered()), this, SLOT(show()));
+    const QRect ScreenRect = QApplication::desktop()->availableGeometry();
+    int height = ScreenRect.height();
+    int width = ScreenRect.width();
 
-    QMenu *LeftMenu = new QMenu(this);
-    LeftMenu->addAction(tr("Параметры"), this, SLOT(show()));
-    LeftMenu->addAction(tr("Обновить"), this, SLOT(show()));
+    this->setGeometry(0,0,width,height);
 
-    option1->setMenu(menuOptions);
+    ui->AppsListView->setGeometry(0, 30, width, height - 150);
 
-    QAction *RightOption = new QAction(tr("Справка"), this);
-    option2->setSoftKeyRole(QAction::NegativeSoftKey);
-    QObject::connect(option2, SIGNAL(triggered()), this, SLOT(close()));
+    ui->label->setGeometry(0,0,width,30);
 
-    QList < QAction* > softKeys;
-    softKeys.append(option1);
-    softKeys.append(option2);
-
-    this->addActions(softKeys);
-    */
+    ui->SearchBox->setGeometry(10, height - 108, width - 20, 20);
 }
 
 MainWindow::~MainWindow()
@@ -127,6 +112,11 @@ void MainWindow::on_AboutAction_triggered()
 }
 
 void MainWindow::on_UpdateAction_triggered()
+{
+    Connect();
+}
+
+void MainWindow::Connect()
 {
 
 }

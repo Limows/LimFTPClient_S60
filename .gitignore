@@ -33,4 +33,5 @@ Makefile*
 *.loc
 *.rss
 *.BAT
+*.bat
 *.inf

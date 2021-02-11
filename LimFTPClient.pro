@@ -20,14 +20,22 @@ symbian {
     RC_FILE += \
         Resources.rc
 
-    VERSION = 0.1.2
+    VERSION = "0.1.4"
 
-    vendorinfo = "%{\"LimSoft\"}" ":\"LimSoft\""
+    DEFINES += APP_VERSION=\"\\\"$${VERSION}\\\"\"
+
+    VENDOR = "LimSoft"
+
+    DEFINES += APP_VENDOR=\"\\\"$${VENDOR}\\\"\"
+
+    vendorinfo = "%{\"$$VENDOR\"}" ":\"$$VENDOR\""
+
+    DATE = $$system(date /t)
+
+    DEFINES += BUILDDATE=\"\\\"$${DATE}\\\"\"
 
     LimFTPClient_template.pkg_prerules = vendorinfo
     DEPLOYMENT += LimFTPClient_template
-
-    DEPLOYMENT.language = "&RU"
 }
 
 # If your application uses the Qt Mobility libraries, uncomment
@@ -44,7 +52,8 @@ SOURCES += \
     paramshelper.cpp \
     nethelper.cpp \
     iohelper.cpp \
-    systemhelper.cpp
+    systemhelper.cpp \
+    appdialog.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -53,12 +62,14 @@ HEADERS += \
     paramshelper.h \
     nethelper.h \
     iohelper.h \
-    systemhelper.h
+    systemhelper.h \
+    appdialog.h
 
 FORMS += \
     mainwindow.ui \
     paramsdialog.ui \
-    aboutdialog.ui
+    aboutdialog.ui \
+    appdialog.ui
 
 RESOURCES += \
     Resources.rc

@@ -12,6 +12,13 @@ AboutDialog::AboutDialog(QWidget *parent) :
     QObject::connect(RightOption, SIGNAL(triggered()), this, SLOT(close()));
 
     this->addAction(RightOption);
+
+    QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
+
+    ui->labelProductName->setText("Limowski App Manager");
+    ui->labelVersion->setText(tr("Версия: ") + QString(APP_VERSION));
+    ui->labelBuild->setText(tr("Сборка от: ") + QString(BUILDDATE));
+    ui->labelCompanyName->setText(tr("Автор: ") + QString(APP_VENDOR));
 }
 
 AboutDialog::~AboutDialog()
