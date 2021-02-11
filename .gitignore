@@ -31,3 +31,5 @@
 *.mmp
 *.mk
 Makefile*
+*.loc
+*.rss
