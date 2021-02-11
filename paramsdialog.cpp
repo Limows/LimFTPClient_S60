@@ -28,3 +28,23 @@ void ParamsDialog::on_ExitAction_triggered()
 {
     this->close();
 }
+
+void ParamsDialog::on_OpenDirButton_clicked()
+{
+    ui->DownloadPathBox->insert(OpenDirDialog());
+}
+
+QString ParamsDialog::OpenDirDialog()
+{
+    QFileDialog OpenDir;
+    OpenDir.setFileMode(QFileDialog::Directory);
+    OpenDir.setOption(QFileDialog::ShowDirsOnly);
+
+    int Result = OpenDir.exec();
+
+    if (Result)
+    {
+        return OpenDir.selectedFiles()[0];
+    }
+    else return "";
+}

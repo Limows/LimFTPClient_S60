@@ -20,12 +20,14 @@ symbian {
     RC_FILE += \
         Resources.rc
 
-    VERSION = 0.1.1
-    QMAKE_TARGET_COMPANY = LimSoft
-    QMAKE_TAGET_PRODUCT = Limowski App Manager
-    QMAKE_TARGET_DESCRIPTION = Small App Manager for Symbian
+    VERSION = 0.1.2
 
     vendorinfo = "%{\"LimSoft\"}" ":\"LimSoft\""
+
+    LimFTPClient_template.pkg_prerules = vendorinfo
+    DEPLOYMENT += LimFTPClient_template
+
+    DEPLOYMENT.language = "&RU"
 }
 
 # If your application uses the Qt Mobility libraries, uncomment
@@ -38,12 +40,20 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     paramsdialog.cpp \
-    aboutdialog.cpp
+    aboutdialog.cpp \
+    paramshelper.cpp \
+    nethelper.cpp \
+    iohelper.cpp \
+    systemhelper.cpp
 
 HEADERS += \
     mainwindow.h \
     paramsdialog.h \
-    aboutdialog.h
+    aboutdialog.h \
+    paramshelper.h \
+    nethelper.h \
+    iohelper.h \
+    systemhelper.h
 
 FORMS += \
     mainwindow.ui \

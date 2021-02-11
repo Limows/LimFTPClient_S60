@@ -3,6 +3,7 @@
 
 #include <QtGui/QDialog>
 #include <QObject>
+#include <QFileDialog>
 
 namespace Ui {
     class ParamsDialog;
@@ -19,6 +20,10 @@ private slots:
     void on_ParamsDialog_destroyed();
 
     void on_ExitAction_triggered();
+
+    void on_OpenDirButton_clicked();
+
+    QString OpenDirDialog();
 
 private:
     Ui::ParamsDialog *ui;

@@ -24,7 +24,6 @@
 *.cache
 
 # Autogen files
-
 [Mm]oc/
 [Uu]i/
 [Rr]cc/
@@ -33,3 +32,5 @@
 Makefile*
 *.loc
 *.rss
+*.BAT
+*.ini
