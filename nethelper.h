@@ -2,6 +2,8 @@
 #define NETHELPER_H
 
 #include <QUrl>
+#include <QFtp>
+#include <QHttp>
 
 class NetHelper
 {

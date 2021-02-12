@@ -11,6 +11,19 @@ AboutDialog::AboutDialog(QWidget *parent) :
     RightOption->setSoftKeyRole(QAction::NegativeSoftKey);
     QObject::connect(RightOption, SIGNAL(triggered()), this, SLOT(close()));
 
+    //const QRect ScreenRect = QApplication::desktop()->availableGeometry();
+    const QRect ScreenRect = QDialog::geometry();
+    int height = ScreenRect.height();
+    int width = ScreenRect.width();
+
+    QRect *FormRect = new QRect(0, 0, width, height);
+
+    this->setGeometry(*FormRect);
+
+    ui->GridLayout->setGeometry(*FormRect);
+
+    ui->gridLayoutWidget->setGeometry(*FormRect);
+
     this->addAction(RightOption);
 
     QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));

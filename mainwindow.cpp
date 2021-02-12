@@ -6,17 +6,22 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    const QRect ScreenRect = QApplication::desktop()->availableGeometry();
+    //const QRect ScreenRect = QApplication::desktop()->availableGeometry();
+    const QRect ScreenRect = QApplication::desktop()->screenGeometry();
     int height = ScreenRect.height();
     int width = ScreenRect.width();
 
-    this->setGeometry(0,0,width,height);
+    QRect *FormRect = new QRect(0, 0, width, height);
 
-    ui->AppsListView->setGeometry(0, 30, width, height - 150);
+    this->setGeometry(*FormRect);
 
-    ui->label->setGeometry(0,0,width,30);
+    ui->GridLayout->setGeometry(*FormRect);
 
-    ui->SearchBox->setGeometry(10, height - 108, width - 20, 20);
+    ui->gridLayoutWidget->setGeometry(*FormRect);
+
+    QString ServerURIString = ParamsHelper::ServerURI.toString();
+
+    ParamsHelper::SystemURI = QUrl(ServerURIString + "/Symbian_S60v3");
 }
 
 MainWindow::~MainWindow()
@@ -88,7 +93,7 @@ void MainWindow::on_ParamsAction_triggered()
 
 void MainWindow::on_RefreshAction_triggered()
 {
-
+    Connect();
 }
 
 void MainWindow::on_HelpAction_triggered()
@@ -113,10 +118,10 @@ void MainWindow::on_AboutAction_triggered()
 
 void MainWindow::on_UpdateAction_triggered()
 {
-    Connect();
+
 }
 
 void MainWindow::Connect()
 {
-
+    NetHelper::ReadListing(ParamsHelper::SystemURI);
 }

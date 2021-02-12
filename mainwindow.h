@@ -2,7 +2,9 @@
 #define MAINWINDOW_H
 
 #include "paramsdialog.h"
+#include "paramshelper.h"
 #include "aboutdialog.h"
+#include "nethelper.h"
 
 #include <QtGui/QMainWindow>
 #include <QTextCodec>
@@ -10,6 +12,7 @@
 #include <QMessageBox>
 #include <QScreen>
 #include <QDesktopWidget>
+#include <QUrl>
 
 namespace Ui {
     class MainWindow;

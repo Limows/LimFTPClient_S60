@@ -17,10 +17,13 @@ symbian:TARGET.UID3 = 0xEE3EB787
 symbian {
     TARGET.CAPABILITY += NetworkServices
 
+    QT += network
+
     RC_FILE += \
         Resources.rc
+}
 
-    VERSION = "0.1.4"
+    VERSION = "0.1.5"
 
     DEFINES += APP_VERSION=\"\\\"$${VERSION}\\\"\"
 
@@ -36,7 +39,7 @@ symbian {
 
     LimFTPClient_template.pkg_prerules = vendorinfo
     DEPLOYMENT += LimFTPClient_template
-}
+#}
 
 # If your application uses the Qt Mobility libraries, uncomment
 # the following lines and add the respective components to the 

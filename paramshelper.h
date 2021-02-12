@@ -4,14 +4,15 @@
 #include "list"
 
 #include <QString>
+#include <QUrl>
 
 class ParamsHelper
 {
 public:
-    //static Uri ServerURI = new Uri("ftp://anon@limowski.xyz:2121");
-    //static public Uri CurrentURI;
-    //static public Uri SystemURI;
-    //static public Uri AppURI;
+    static QUrl ServerURI;
+    static QUrl CurrentURI;
+    static QUrl SystemURI;
+    static QUrl AppURI;
     static QString DownloadPath;
     static QString InstallPath;
     static QString ConfigPath;
