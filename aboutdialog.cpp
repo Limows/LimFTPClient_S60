@@ -2,17 +2,12 @@
 #include "ui_aboutdialog.h"
 
 AboutDialog::AboutDialog(QWidget *parent) :
-    QDialog(parent),
+    QWidget(parent),
     ui(new Ui::AboutDialog)
 {
     ui->setupUi(this);
 
-    QAction *RightOption = new QAction("OK", this);
-    RightOption->setSoftKeyRole(QAction::NegativeSoftKey);
-    QObject::connect(RightOption, SIGNAL(triggered()), this, SLOT(close()));
-
-    //const QRect ScreenRect = QApplication::desktop()->availableGeometry();
-    const QRect ScreenRect = QDialog::geometry();
+    const QRect ScreenRect = QApplication::desktop()->screenGeometry();
     int height = ScreenRect.height();
     int width = ScreenRect.width();
 
@@ -20,11 +15,13 @@ AboutDialog::AboutDialog(QWidget *parent) :
 
     this->setGeometry(*FormRect);
 
-    ui->GridLayout->setGeometry(*FormRect);
+    ui->ContentLayout->setGeometry(*FormRect);
 
-    ui->gridLayoutWidget->setGeometry(*FormRect);
+    ui->widget->setGeometry(*FormRect);
 
-    this->addAction(RightOption);
+    ui->TitleLabel->setAutoFillBackground(true);
+
+    //ui->->setGeometry(*FormRect);
 
     QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
 
@@ -39,7 +36,13 @@ AboutDialog::~AboutDialog()
     delete ui;
 }
 
-void AboutDialog::on_ExitAction_triggered()
+void AboutDialog::on_OKButton_clicked()
 {
     this->close();
+    emit closed();
+}
+
+void AboutDialog::on_AboutDialog_destroyed()
+{
+
 }

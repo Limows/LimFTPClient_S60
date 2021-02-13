@@ -6,12 +6,12 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    //const QRect ScreenRect = QApplication::desktop()->availableGeometry();
-    const QRect ScreenRect = QApplication::desktop()->screenGeometry();
+    //const QRect ScreenRect = QApplication::desktop()->availableGeometry(this);
+    const QRect ScreenRect = QApplication::desktop()->screenGeometry(this);
     int height = ScreenRect.height();
     int width = ScreenRect.width();
 
-    QRect *FormRect = new QRect(0, 0, width, height);
+    QRect *FormRect = new QRect(0, 0, width, (int)(height*0.92));
 
     this->setGeometry(*FormRect);
 
@@ -88,7 +88,9 @@ void MainWindow::on_ParamsAction_triggered()
 {
     ParamsDialog *NewParamsDialog = new ParamsDialog();
 
-    NewParamsDialog->showMaximized();
+    NewParamsDialog->showFullScreen();
+
+    connect(NewParamsDialog, SIGNAL(closed()), this, SLOT(on_Closing_Dialog()));
 }
 
 void MainWindow::on_RefreshAction_triggered()
@@ -113,7 +115,21 @@ void MainWindow::on_AboutAction_triggered()
 {
     AboutDialog *NewAboutDialog = new AboutDialog();
 
-    NewAboutDialog->showMaximized();
+    NewAboutDialog->setWindowIcon(QIcon(":/icons/logo.ico"));
+
+    NewAboutDialog->showFullScreen();
+
+    connect(NewAboutDialog, SIGNAL(closed()), this, SLOT(on_Closing_Dialog()));
+}
+
+void MainWindow::on_Closing_Dialog()
+{
+    //Qt::WindowFlags flags;
+    //flags |= Qt::WindowSoftkeysVisibleHint;
+    //flags &= ~Qt::WindowSoftkeysRespondHint;
+
+    //this->setWindowFlags(flags);
+    this->showFullScreen();
 }
 
 void MainWindow::on_UpdateAction_triggered()

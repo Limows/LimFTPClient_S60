@@ -2,26 +2,29 @@
 #include "ui_paramsdialog.h"
 
 ParamsDialog::ParamsDialog(QWidget *parent) :
-    QDialog(parent),
+    QWidget(parent),
     ui(new Ui::ParamsDialog)
 {
     ui->setupUi(this);
 
-    QAction *RightOption = new QAction("Exit", this);
-    RightOption->setSoftKeyRole(QAction::NegativeSoftKey);
-    QObject::connect(RightOption, SIGNAL(triggered()), this, SLOT(close()));
+    const QRect ScreenRect = QApplication::desktop()->screenGeometry();
+    int height = ScreenRect.height();
+    int width = ScreenRect.width();
 
-    this->addAction(RightOption);
+    QRect *FormRect = new QRect(0, 0, width, height);
+
+    this->setGeometry(*FormRect);
+
+    ui->ContentLayout->setGeometry(*FormRect);
+
+    ui->gridLayoutWidget->setGeometry(*FormRect);
+
+    ui->TitleLabel->setAutoFillBackground(true);
 }
 
 ParamsDialog::~ParamsDialog()
 {
     delete ui;
-}
-
-void ParamsDialog::on_ParamsDialog_destroyed()
-{
-
 }
 
 void ParamsDialog::on_ExitAction_triggered()
@@ -47,4 +50,10 @@ QString ParamsDialog::OpenDirDialog()
         return OpenDir.selectedFiles()[0];
     }
     else return "";
+}
+
+void ParamsDialog::on_SaveButton_clicked()
+{
+    this->close();
+    emit closed();
 }

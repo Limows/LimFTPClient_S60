@@ -1,14 +1,16 @@
 #ifndef ABOUTDIALOG_H
 #define ABOUTDIALOG_H
 
-#include <QDialog>
 #include <QTextCodec>
+#include <QWidget>
+#include <QtCore/QCoreApplication>
+#include <QDesktopWidget>
 
 namespace Ui {
     class AboutDialog;
 }
 
-class AboutDialog : public QDialog
+class AboutDialog : public QWidget
 {
     Q_OBJECT
 
@@ -17,8 +19,13 @@ public:
 
     ~AboutDialog();
 
+signals:
+    void closed();
+
 private slots:
-    void on_ExitAction_triggered();
+    void on_OKButton_clicked();
+
+    void on_AboutDialog_destroyed();
 
 private:
     Ui::AboutDialog *ui;

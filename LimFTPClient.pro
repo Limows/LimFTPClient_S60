@@ -17,11 +17,11 @@ symbian:TARGET.UID3 = 0xEE3EB787
 symbian {
     TARGET.CAPABILITY += NetworkServices
 
-    QT += network
-
     RC_FILE += \
         Resources.rc
 }
+
+    QT += network
 
     VERSION = "0.1.5"
 

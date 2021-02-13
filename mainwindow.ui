@@ -447,7 +447,7 @@
     </property>
     <layout class="QGridLayout" name="GridLayout">
      <property name="bottomMargin">
-      <number>80</number>
+      <number>0</number>
      </property>
      <property name="spacing">
       <number>0</number>

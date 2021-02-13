@@ -48,6 +48,8 @@ private slots:
 
     void on_UpdateAction_triggered();
 
+    void on_Closing_Dialog();
+
 private:
     Ui::MainWindow *ui;
 

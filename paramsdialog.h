@@ -1,7 +1,9 @@
 #ifndef PARAMSDIALOG_H
 #define PARAMSDIALOG_H
 
-#include <QtGui/QDialog>
+#include <QWidget>
+#include <QtCore/QCoreApplication>
+#include <QDesktopWidget>
 #include <QObject>
 #include <QFileDialog>
 
@@ -9,7 +11,7 @@ namespace Ui {
     class ParamsDialog;
 }
 
-class ParamsDialog : public QDialog
+class ParamsDialog : public QWidget
 {
     Q_OBJECT
 public:
@@ -17,12 +19,15 @@ public:
 
     virtual ~ParamsDialog();
 
-private slots:
-    void on_ParamsDialog_destroyed();
+signals:
+    void closed();
 
+private slots:
     void on_ExitAction_triggered();
 
     void on_OpenDirButton_clicked();
+
+    void on_SaveButton_clicked();
 
 private:
     Ui::ParamsDialog *ui;
