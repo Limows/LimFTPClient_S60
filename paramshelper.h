@@ -5,6 +5,7 @@
 
 #include <QString>
 #include <QUrl>
+#include <QList>
 
 class ParamsHelper
 {
@@ -17,7 +18,7 @@ public:
     static QString InstallPath;
     static QString ConfigPath;
     static int OSVersion;
-    static std::list<std::string> AppsList;
+    static QList<QString> AppsList;
     static bool IsThreadAlive;
     static bool IsThreadError;
     static bool IsThreadWaiting;

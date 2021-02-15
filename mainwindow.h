@@ -50,11 +50,13 @@ private slots:
 
     void on_Closing_Dialog();
 
+    void on_Listing_Complete(bool IsError);
+
 private:
     Ui::MainWindow *ui;
 
 private:
-    void Connect();
+    void BeginConnect();
 };
 
 #endif // MAINWINDOW_H

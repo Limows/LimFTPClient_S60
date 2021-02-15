@@ -1,24 +1,45 @@
 #ifndef NETHELPER_H
 #define NETHELPER_H
 
+#include "paramshelper.h"
+#include "mainwindow.h"
+
 #include <QUrl>
 #include <QFtp>
 #include <QHttp>
+#include <QWidget>
+#include <QtCore/QCoreApplication>
+#include <QDesktopWidget>
 
-class NetHelper
+class NetHelper : public QObject
 {
+    Q_OBJECT
+
 public:
     NetHelper();
 
-    static void DownloadFile(QUrl URI, QString DownloadDir, QString FileName);
+    void DownloadFile(QUrl URI, QString DownloadDir, QString FileName);
 
-    static QString LoadInfo(QUrl URI, QString AppName);
+    QString LoadInfo(QUrl URI, QString AppName);
 
-    static void ReadListing(QUrl URI);
+    void ReadListing(QUrl URI);
 
-    static QString CheckUpdates();
+    QString CheckUpdates();
 
-    static void GetUpdates(QString Version);
+    void GetUpdates(QString Version);
+
+public slots:
+    void AddToList(const QUrlInfo &UriInfo);
+
+    void FtpCommandFinished(const int Id, const bool IsError);
+
+    void FtpDone(bool Bool);
+
+signals:
+    void done(bool IsError);
+
+private:
+    QFtp *Ftp;
 };
 
 #endif // NETHELPER_H

@@ -6,12 +6,13 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    //const QRect ScreenRect = QApplication::desktop()->availableGeometry(this);
     const QRect ScreenRect = QApplication::desktop()->screenGeometry(this);
     int height = ScreenRect.height();
     int width = ScreenRect.width();
 
     QRect *FormRect = new QRect(0, 0, width, (int)(height*0.92));
+
+    //int menu_height = this->menuBar()->contentsRect().height();
 
     this->setGeometry(*FormRect);
 
@@ -22,7 +23,6 @@ MainWindow::MainWindow(QWidget *parent)
     QString ServerURIString = ParamsHelper::ServerURI.toString();
 
     ParamsHelper::SystemURI = QUrl(ServerURIString + "/Symbian_S60v3");
-
 }
 
 MainWindow::~MainWindow()
@@ -96,7 +96,7 @@ void MainWindow::on_ParamsAction_triggered()
 
 void MainWindow::on_RefreshAction_triggered()
 {
-    Connect();
+    BeginConnect();
 }
 
 void MainWindow::on_HelpAction_triggered()
@@ -138,7 +138,34 @@ void MainWindow::on_UpdateAction_triggered()
 
 }
 
-void MainWindow::Connect()
+void MainWindow::BeginConnect()
 {
-    NetHelper::ReadListing(ParamsHelper::SystemURI);
+    NetHelper *NewNetHelper = new NetHelper();
+    NewNetHelper->ReadListing(ParamsHelper::SystemURI);
+    connect(NewNetHelper, SIGNAL(done(bool)), this, SLOT(on_Listing_Complete(bool)));
+
+    //NetHelper::ReadListing(ParamsHelper::SystemURI);
+}
+
+void MainWindow::on_Listing_Complete(bool IsError)
+{
+    if (!IsError)
+    {
+        for (int i = 0; i < ParamsHelper::AppsList.length(); i++)
+        {
+            ui->AppsListWidget->insertItem(i, ParamsHelper::AppsList[i]);
+        }
+    }
+    else
+    {
+        QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
+
+        QMessageBox ErrorBox;
+
+        ErrorBox.setText(tr("Ошибка"));
+        ErrorBox.setIcon(QMessageBox::Information);
+        ErrorBox.setInformativeText(tr("Не удалось подключиться к серверу"));
+
+        ErrorBox.exec();
+    }
 }
