@@ -6,6 +6,7 @@
 #include <QDesktopWidget>
 #include <QObject>
 #include <QFileDialog>
+#include <QPalette>
 
 namespace Ui {
     class ParamsDialog;

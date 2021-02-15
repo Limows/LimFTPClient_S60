@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
     QString ServerURIString = ParamsHelper::ServerURI.toString();
 
     ParamsHelper::SystemURI = QUrl(ServerURIString + "/Symbian_S60v3");
+
 }
 
 MainWindow::~MainWindow()

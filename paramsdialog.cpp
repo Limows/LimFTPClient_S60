@@ -8,18 +8,33 @@ ParamsDialog::ParamsDialog(QWidget *parent) :
     ui->setupUi(this);
 
     const QRect ScreenRect = QApplication::desktop()->screenGeometry();
-    int height = ScreenRect.height();
-    int width = ScreenRect.width();
 
-    QRect *FormRect = new QRect(0, 0, width, height);
+    this->setGeometry(ScreenRect);
 
-    this->setGeometry(*FormRect);
+    ui->ContentLayout->setGeometry(ScreenRect);
 
-    ui->ContentLayout->setGeometry(*FormRect);
-
-    ui->gridLayoutWidget->setGeometry(*FormRect);
+    ui->gridLayoutWidget->setGeometry(ScreenRect);
 
     ui->TitleLabel->setAutoFillBackground(true);
+
+    QColor BackColor = ui->TabWidget->palette().color(QPalette::Background);
+
+    QPalette palette = this->palette();
+    palette.setColor(this->backgroundRole(), BackColor);
+    this->setPalette(palette);
+
+    QRect TabWidgetRect = ui->TabWidget->geometry();
+
+    QRect *TabRect = new QRect(0, 0, TabWidgetRect.width() - 3, TabWidgetRect.height() - 20);
+
+    ui->DownloadTabLayout->setGeometry(*TabRect);
+    ui->gridLayoutWidget_2->setGeometry(*TabRect);
+
+    ui->InstallTabLayout->setGeometry(*TabRect);
+    ui->gridLayoutWidget_3->setGeometry(*TabRect);
+
+    ui->BufferTabLayout->setGeometry(*TabRect);
+    ui->gridLayoutWidget_4->setGeometry(*TabRect);
 }
 
 ParamsDialog::~ParamsDialog()
