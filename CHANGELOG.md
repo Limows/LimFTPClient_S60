@@ -1,7 +1,7 @@
 # Changelog
 
-## [v0.1.1] - (10.02.21)
+## [v0.3.0] - (15.02.21)
 
  - Initial release
 
-[v0.1.1]: https://github.com/Limows/LimFTPClient_S60/releases/tag/v0.1.1
+[v0.3.0]: https://github.com/Limows/LimFTPClient_S60/releases/tag/v0.3.0

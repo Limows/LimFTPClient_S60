@@ -38,12 +38,16 @@ You need the following stuff to install this program:
 ## OS Support
 
  - Symbian S60v3
+ - Symbian S60v5
+ - Symbian^3
  
 ## Used projects
 
 ## Tested devices
 
  - Nokia N95
+ - Nokia E72
+ - Nokia N8
 
 ## Contributing
 
