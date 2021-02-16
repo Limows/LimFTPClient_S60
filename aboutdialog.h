@@ -25,8 +25,6 @@ signals:
 private slots:
     void on_OKButton_clicked();
 
-    void on_AboutDialog_destroyed();
-
 private:
     Ui::AboutDialog *ui;
 };

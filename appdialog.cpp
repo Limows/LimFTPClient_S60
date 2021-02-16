@@ -1,12 +1,12 @@
 #include "appdialog.h"
 #include "ui_appdialog.h"
 
-AppDialog::AppDialog(QWidget *parent, QString AppName) :
+AppDialog::AppDialog(QString AppName, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AppDialog)
 {
     ui->setupUi(this);
-    this->setWindowTitle(AppName);
+    ui->TitleLabel->setText(AppName);
 
     const QRect ScreenRect = QApplication::desktop()->screenGeometry();
     int height = ScreenRect.height();
@@ -31,4 +31,10 @@ AppDialog::~AppDialog()
 void AppDialog::on_DownloadButton_clicked()
 {
 
+}
+
+void AppDialog::on_BackButton_clicked()
+{
+    this->close();
+    emit closed();
 }

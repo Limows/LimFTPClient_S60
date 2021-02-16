@@ -15,11 +15,16 @@ class AppDialog : public QWidget
     Q_OBJECT
 
 public:
-    explicit AppDialog(QWidget *parent = 0, QString AppName = "AppName");
+    explicit AppDialog(QString AppName = "Application", QWidget *parent = 0);
     ~AppDialog();
 
 private slots:
     void on_DownloadButton_clicked();
+
+    void on_BackButton_clicked();
+
+signals:
+    void closed();
 
 private:
     Ui::AppDialog *ui;

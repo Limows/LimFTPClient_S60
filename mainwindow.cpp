@@ -25,6 +25,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     ParamsHelper::SystemURI = QUrl(ServerURIString + Repository);
 
+    connect(ui->AppsListWidget, SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(on_AppsListWidget_itemClicked(QListWidgetItem*)));
+    //connect(ui->AppsListWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(on_AppsListWidget_itemClicked(QListWidgetItem*)));
+
     BeginConnect();
 }
 
@@ -128,11 +131,11 @@ void MainWindow::on_AboutAction_triggered()
 
 void MainWindow::on_Closing_Dialog()
 {
-    //Qt::WindowFlags flags;
-    //flags |= Qt::WindowSoftkeysVisibleHint;
-    //flags &= ~Qt::WindowSoftkeysRespondHint;
+    Qt::WindowFlags flags;
+    flags |= Qt::WindowSoftkeysVisibleHint;
+    flags &= ~Qt::WindowSoftkeysRespondHint;
 
-    //this->setWindowFlags(flags);
+    this->setWindowFlags(flags);
     this->showFullScreen();
 }
 
@@ -209,4 +212,14 @@ QString MainWindow::SetRepository()
     default:
         return "/Symbian^3";
     }
+}
+
+void MainWindow::on_AppsListWidget_itemClicked(QListWidgetItem *item)
+{
+    QString AppName = item->text();
+    AppDialog *NewAppDialog = new AppDialog(AppName);
+
+    NewAppDialog->showFullScreen();
+
+    connect(NewAppDialog, SIGNAL(closed()), this, SLOT(on_Closing_Dialog()));
 }

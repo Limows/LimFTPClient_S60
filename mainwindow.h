@@ -4,6 +4,7 @@
 #include "paramsdialog.h"
 #include "paramshelper.h"
 #include "aboutdialog.h"
+#include "appdialog.h"
 #include "nethelper.h"
 
 #include <QtGui/QMainWindow>
@@ -12,8 +13,10 @@
 #include <QMessageBox>
 #include <QScreen>
 #include <QDesktopWidget>
+#include <QListWidgetItem>
 #include <QUrl>
 #include <QSysInfo>
+#include <QListWidget>
 
 namespace Ui {
     class MainWindow;
@@ -52,6 +55,8 @@ private slots:
     void on_Closing_Dialog();
 
     void on_Listing_Complete(bool IsError);
+
+    void on_AppsListWidget_itemClicked(QListWidgetItem *item);
 
 private:
     Ui::MainWindow *ui;

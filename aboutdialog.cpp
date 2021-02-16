@@ -36,8 +36,3 @@ void AboutDialog::on_OKButton_clicked()
     this->close();
     emit closed();
 }
-
-void AboutDialog::on_AboutDialog_destroyed()
-{
-
-}

@@ -27,7 +27,7 @@ public:
 
     void GetUpdates(QString Version);
 
-public slots:
+private slots:
     void AddToList(const QUrlInfo &UriInfo);
 
     void FtpCommandFinished(const int Id, const bool IsError);
