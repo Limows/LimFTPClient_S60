@@ -23,7 +23,7 @@ symbian {
 
     QT += network
 
-    VERSION = "0.3.0"
+    VERSION = "0.3.1"
 
     DEFINES += APP_VERSION=\"\\\"$${VERSION}\\\"\"
 
@@ -82,4 +82,5 @@ include(deployment.pri)
 qtcAddDeployment()
 
 OTHER_FILES += \
+    LimFTPClient.svg \
     LimFTPClient.svg

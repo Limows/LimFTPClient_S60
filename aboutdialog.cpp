@@ -8,20 +8,14 @@ AboutDialog::AboutDialog(QWidget *parent) :
     ui->setupUi(this);
 
     const QRect ScreenRect = QApplication::desktop()->screenGeometry();
-    int height = ScreenRect.height();
-    int width = ScreenRect.width();
 
-    QRect *FormRect = new QRect(0, 0, width, height);
+    this->setGeometry(ScreenRect);
 
-    this->setGeometry(*FormRect);
+    ui->ContentLayout->setGeometry(ScreenRect);
 
-    ui->ContentLayout->setGeometry(*FormRect);
-
-    ui->widget->setGeometry(*FormRect);
+    ui->widget->setGeometry(ScreenRect);
 
     ui->TitleLabel->setAutoFillBackground(true);
-
-    //ui->->setGeometry(*FormRect);
 
     QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
 
@@ -29,6 +23,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
     ui->labelVersion->setText(tr("Версия: ") + QString(APP_VERSION));
     ui->labelBuild->setText(tr("Сборка от: ") + QString(BUILDDATE));
     ui->labelCompanyName->setText(tr("Автор: ") + QString(APP_VENDOR));
+    ui->textBoxDescription_5->setText("Small Application Manager for Symbian S60");
 }
 
 AboutDialog::~AboutDialog()

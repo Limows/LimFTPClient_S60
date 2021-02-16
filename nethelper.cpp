@@ -6,6 +6,19 @@ NetHelper::NetHelper()
 
 }
 
+NetHelper::NetHelper(QUrl URI)
+{
+    this->URI = URI;
+    this->Ftp = new QFtp(this);
+
+    connect(this->Ftp, SIGNAL(commandFinished(int,bool)), this, SLOT(FtpCommandFinished(int,bool)));
+    connect(this->Ftp, SIGNAL(done(bool)), this, SLOT(FtpDone(bool)));
+
+    this->Ftp->setTransferMode(QFtp::Passive);
+    this->Ftp->connectToHost(this->URI.host(), this->URI.port());
+    this->Ftp->login(this->URI.userName(), "");
+}
+
 void NetHelper::DownloadFile(QUrl URI, QString DownloadDir, QString FileName)
 {
     return;
@@ -16,17 +29,12 @@ QString NetHelper::LoadInfo(QUrl URI, QString AppName)
 
 }
 
-void NetHelper::ReadListing(QUrl URI)
+void NetHelper::ReadListing()
 {
-    this->Ftp = new QFtp(this);
-    QObject::connect(this->Ftp, SIGNAL(commandFinished(int,bool)), this, SLOT(FtpCommandFinished(int,bool)));
-    QObject::connect(this->Ftp, SIGNAL(listInfo(QUrlInfo)), this, SLOT(AddToList(QUrlInfo)));
-    QObject::connect(this->Ftp, SIGNAL(done(bool)), this, SLOT(FtpDone(bool)));
+    QString FtpPath = this->URI.path();
 
-    this->Ftp->setTransferMode(QFtp::Passive);
-    this->Ftp->connectToHost(URI.host(), URI.port());
-    this->Ftp->login(URI.userName(), "");
-    QString FtpPath = URI.path();
+    connect(this->Ftp, SIGNAL(listInfo(QUrlInfo)), this, SLOT(AddToList(QUrlInfo)));
+
     this->Ftp->cd(FtpPath);
     this->Ftp->list();
     this->Ftp->close();

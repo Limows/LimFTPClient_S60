@@ -1,18 +1,21 @@
 #ifndef APPDIALOG_H
 #define APPDIALOG_H
 
-#include <QDialog>
+#include <QTextCodec>
+#include <QWidget>
+#include <QtCore/QCoreApplication>
+#include <QDesktopWidget>
 
 namespace Ui {
     class AppDialog;
 }
 
-class AppDialog : public QDialog
+class AppDialog : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit AppDialog(QWidget *parent = 0);
+    explicit AppDialog(QWidget *parent = 0, QString AppName = "AppName");
     ~AppDialog();
 
 private slots:

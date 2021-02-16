@@ -23,6 +23,8 @@ MainWindow::MainWindow(QWidget *parent)
     QString ServerURIString = ParamsHelper::ServerURI.toString();
 
     ParamsHelper::SystemURI = QUrl(ServerURIString + "/Symbian_S60v3");
+
+    BeginConnect();
 }
 
 MainWindow::~MainWindow()
@@ -140,11 +142,16 @@ void MainWindow::on_UpdateAction_triggered()
 
 void MainWindow::BeginConnect()
 {
-    NetHelper *NewNetHelper = new NetHelper();
-    NewNetHelper->ReadListing(ParamsHelper::SystemURI);
-    connect(NewNetHelper, SIGNAL(done(bool)), this, SLOT(on_Listing_Complete(bool)));
+    ParamsHelper::CurrentURI = ParamsHelper::SystemURI;
+    NetHelper *FtpNetHelper = new NetHelper(ParamsHelper::CurrentURI);
 
-    //NetHelper::ReadListing(ParamsHelper::SystemURI);
+    ui->AppsListWidget->clear();
+
+    this->setCursor(Qt::WaitCursor);
+
+    connect(FtpNetHelper, SIGNAL(done(bool)), this, SLOT(on_Listing_Complete(bool)));
+
+    FtpNetHelper->ReadListing();
 }
 
 void MainWindow::on_Listing_Complete(bool IsError)
@@ -168,4 +175,6 @@ void MainWindow::on_Listing_Complete(bool IsError)
 
         ErrorBox.exec();
     }
+
+    this->setCursor(Qt::ArrowCursor);
 }

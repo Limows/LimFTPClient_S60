@@ -7,9 +7,7 @@
 #include <QUrl>
 #include <QFtp>
 #include <QHttp>
-#include <QWidget>
-#include <QtCore/QCoreApplication>
-#include <QDesktopWidget>
+#include <QObject>
 
 class NetHelper : public QObject
 {
@@ -18,11 +16,13 @@ class NetHelper : public QObject
 public:
     NetHelper();
 
+    NetHelper(QUrl URI);
+
     void DownloadFile(QUrl URI, QString DownloadDir, QString FileName);
 
     QString LoadInfo(QUrl URI, QString AppName);
 
-    void ReadListing(QUrl URI);
+    void ReadListing();
 
     QString CheckUpdates();
 
@@ -33,13 +33,14 @@ public slots:
 
     void FtpCommandFinished(const int Id, const bool IsError);
 
-    void FtpDone(bool Bool);
+    void FtpDone(bool IsError);
 
 signals:
     void done(bool IsError);
 
 private:
     QFtp *Ftp;
+    QUrl URI;
 };
 
 #endif // NETHELPER_H
