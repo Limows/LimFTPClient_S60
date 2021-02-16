@@ -438,7 +438,7 @@
    <iconset resource="Resources.rc">
     <normaloff>:/icons/logo.ico</normaloff>:/icons/logo.ico</iconset>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -918,6 +918,9 @@
     </item>
     <item row="5" column="1">
      <widget class="QTextEdit" name="textBoxDescription_5">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="palette">
        <palette>
         <active>
@@ -1198,9 +1201,9 @@
          <colorrole role="WindowText">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>127</red>
-            <green>127</green>
-            <blue>127</blue>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
            </color>
           </brush>
          </colorrole>
@@ -1252,9 +1255,9 @@
          <colorrole role="Text">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>127</red>
-            <green>127</green>
-            <blue>127</blue>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
            </color>
           </brush>
          </colorrole>
@@ -1270,9 +1273,9 @@
          <colorrole role="ButtonText">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>127</red>
-            <green>127</green>
-            <blue>127</blue>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
            </color>
           </brush>
          </colorrole>

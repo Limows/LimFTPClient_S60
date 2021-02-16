@@ -19,12 +19,12 @@ NetHelper::NetHelper(QUrl URI)
     this->Ftp->login(this->URI.userName(), "");
 }
 
-void NetHelper::DownloadFile(QUrl URI, QString DownloadDir, QString FileName)
+void NetHelper::DownloadFile(QString DownloadDir, QString FileName)
 {
     return;
 }
 
-QString NetHelper::LoadInfo(QUrl URI, QString AppName)
+QString NetHelper::LoadInfo(QString AppName)
 {
 
 }
@@ -59,16 +59,18 @@ void NetHelper::FtpCommandFinished(const int Id, const bool IsError)
     {
         Status = "Done";
     }
-
-    if (IsError)
-    {
-        this->Ftp->close();
-        emit done(IsError);
-    }
 }
 
 void NetHelper::FtpDone(bool IsError)
 {
+    QFtp::Command Command = Ftp->currentCommand();
+    QString Status = "";
+
+    if (Command == QFtp::Close)
+    {
+        Status = "Done";
+    }
+
     emit done(IsError);
 }
 

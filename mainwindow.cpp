@@ -21,8 +21,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->gridLayoutWidget->setGeometry(*FormRect);
 
     QString ServerURIString = ParamsHelper::ServerURI.toString();
+    QString Repository = SetRepository();
 
-    ParamsHelper::SystemURI = QUrl(ServerURIString + "/Symbian_S60v3");
+    ParamsHelper::SystemURI = QUrl(ServerURIString + Repository);
 
     BeginConnect();
 }
@@ -170,11 +171,42 @@ void MainWindow::on_Listing_Complete(bool IsError)
         QMessageBox ErrorBox;
 
         ErrorBox.setText(tr("Ошибка"));
-        ErrorBox.setIcon(QMessageBox::Information);
+        ErrorBox.setIcon(QMessageBox::Critical);
         ErrorBox.setInformativeText(tr("Не удалось подключиться к серверу"));
 
         ErrorBox.exec();
     }
 
     this->setCursor(Qt::ArrowCursor);
+}
+
+QString MainWindow::SetRepository()
+{
+    ParamsHelper::OSVersion = QSysInfo::s60Version();
+
+    switch (ParamsHelper::OSVersion)
+    {
+    case QSysInfo::SV_S60_3_1:
+        return "/Symbian_S60v3";
+        break;
+
+    case QSysInfo::SV_S60_3_2:
+        return "/Symbian_S60v3";
+        break;
+
+    case QSysInfo::SV_S60_5_0:
+        return "/Symbian_S60v5";
+        break;
+
+    case QSysInfo::SV_S60_5_1:
+        return "/Symbian_S60v5";
+        break;
+
+    case QSysInfo::SV_S60_5_2:
+        return "/Symbian_S60v5";
+        break;
+
+    default:
+        return "/Symbian^3";
+    }
 }

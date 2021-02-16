@@ -1,11 +1,10 @@
 #ifndef PARAMSHELPER_H
 #define PARAMSHELPER_H
 
-#include "list"
-
 #include <QString>
 #include <QUrl>
 #include <QList>
+#include <QSysInfo>
 
 class ParamsHelper
 {
@@ -17,7 +16,7 @@ public:
     static QString DownloadPath;
     static QString InstallPath;
     static QString ConfigPath;
-    static int OSVersion;
+    static QSysInfo::S60Version OSVersion;
     static QList<QString> AppsList;
     static bool IsThreadAlive;
     static bool IsThreadError;

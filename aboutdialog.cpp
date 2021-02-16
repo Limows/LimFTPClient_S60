@@ -13,7 +13,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
 
     ui->ContentLayout->setGeometry(ScreenRect);
 
-    ui->widget->setGeometry(ScreenRect);
+    ui->layoutWidget->setGeometry(ScreenRect);
 
     ui->TitleLabel->setAutoFillBackground(true);
 

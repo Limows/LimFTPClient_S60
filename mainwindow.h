@@ -13,6 +13,7 @@
 #include <QScreen>
 #include <QDesktopWidget>
 #include <QUrl>
+#include <QSysInfo>
 
 namespace Ui {
     class MainWindow;
@@ -57,6 +58,8 @@ private:
 
 private:
     void BeginConnect();
+
+    QString SetRepository();
 };
 
 #endif // MAINWINDOW_H

@@ -2,7 +2,6 @@
 #define NETHELPER_H
 
 #include "paramshelper.h"
-#include "mainwindow.h"
 
 #include <QUrl>
 #include <QFtp>
@@ -18,9 +17,9 @@ public:
 
     NetHelper(QUrl URI);
 
-    void DownloadFile(QUrl URI, QString DownloadDir, QString FileName);
+    void DownloadFile(QString DownloadDir, QString FileName);
 
-    QString LoadInfo(QUrl URI, QString AppName);
+    QString LoadInfo(QString AppName);
 
     void ReadListing();
 
