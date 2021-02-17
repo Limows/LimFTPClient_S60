@@ -1,6 +1,8 @@
 #ifndef PARAMSDIALOG_H
 #define PARAMSDIALOG_H
 
+#include "paramshelper.h"
+
 #include <QWidget>
 #include <QtCore/QCoreApplication>
 #include <QDesktopWidget>

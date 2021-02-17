@@ -35,6 +35,11 @@ ParamsDialog::ParamsDialog(QWidget *parent) :
 
     ui->BufferTabLayout->setGeometry(*TabRect);
     ui->gridLayoutWidget_4->setGeometry(*TabRect);
+
+    ui->AutoInstallBox->setChecked(ParamsHelper::IsAutoInstall);
+    ui->OverwriteDirsBox->setChecked(ParamsHelper::IsOverwrite);
+    ui->RmPackageBox->setChecked(ParamsHelper::IsRmPackage);
+    ui->DownloadPathBox->setText(ParamsHelper::DownloadPath);
 }
 
 ParamsDialog::~ParamsDialog()
@@ -69,6 +74,11 @@ QString ParamsDialog::OpenDirDialog()
 
 void ParamsDialog::on_SaveButton_clicked()
 {
+    ParamsHelper::DownloadPath = ui->DownloadPathBox->text();
+    ParamsHelper::IsAutoInstall = ui->AutoInstallBox->isChecked();
+    ParamsHelper::IsOverwrite = ui->OverwriteDirsBox->isChecked();
+    ParamsHelper::IsRmPackage = ui->RmPackageBox->isChecked();
+
     this->close();
     emit closed();
 }

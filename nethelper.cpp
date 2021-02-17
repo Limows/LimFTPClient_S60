@@ -6,17 +6,32 @@ NetHelper::NetHelper()
 
 }
 
-NetHelper::NetHelper(QUrl URI)
+NetHelper::NetHelper(QUrl URI, bool IsFTP)
 {
-    this->URI = URI;
-    this->Ftp = new QFtp(this);
+    if (IsFTP)
+    {
+        this->URI = URI;
+        this->Ftp = new QFtp(this);
 
-    connect(this->Ftp, SIGNAL(commandFinished(int,bool)), this, SLOT(FtpCommandFinished(int,bool)));
-    connect(this->Ftp, SIGNAL(done(bool)), this, SLOT(FtpDone(bool)));
+        connect(this->Ftp, SIGNAL(commandFinished(int,bool)), this, SLOT(FtpCommandFinished(int,bool)));
+        connect(this->Ftp, SIGNAL(done(bool)), this, SLOT(FtpDone(bool)));
 
-    this->Ftp->setTransferMode(QFtp::Passive);
-    this->Ftp->connectToHost(this->URI.host(), this->URI.port());
-    this->Ftp->login(this->URI.userName(), "");
+        this->Ftp->setTransferMode(QFtp::Passive);
+        this->Ftp->connectToHost(this->URI.host(), this->URI.port());
+        this->Ftp->login(this->URI.userName(), "");
+    }
+    else
+    {
+        this->URI = URI;
+        this->Http = new QHttp(this);
+        this->Reader = new QBuffer(this);
+        this->Update = new QFile(ParamsHelper::DownloadPath + "/Update.sis");
+
+        //connect(this->Http, SIGNAL(requestFinished(int,bool)), this, SLOT(HttpCommandFinished(int,bool)));
+        //connect(this->Http, SIGNAL(done(bool)), SLOT(HttpDone(bool)));
+
+        this->Http->setHost(this->URI.host());
+    }
 }
 
 void NetHelper::DownloadFile(QString DownloadDir, QString FileName)
@@ -74,12 +89,38 @@ void NetHelper::FtpDone(bool IsError)
     emit done(IsError);
 }
 
-QString NetHelper::CheckUpdates()
+QString NetHelper::CheckUpdates(QString Source)
 {
+    QEventLoop pause;
 
+    connect(this->Http, SIGNAL(done(bool)), &pause, SLOT(quit()));
+
+    Reader->open(QBuffer::ReadWrite);
+    this->Http->get(Source, this->Reader);
+    this->Http->closeConnection();
+    pause.exec();
+
+    return Reader->buffer();
 }
 
-void NetHelper::GetUpdates(QString Version)
+void NetHelper::GetUpdates(QString Source)
 {
-    return;
+    QEventLoop pause;
+
+    connect(this->Http, SIGNAL(done(bool)), &pause, SLOT(quit()));
+
+    Update->open(QFile::ReadWrite);
+    this->Http->get(Source, this->Update);
+    this->Http->closeConnection();
+    pause.exec();
+}
+
+void NetHelper::HttpDone(bool IsError)
+{
+    emit done(IsError);
+}
+
+void NetHelper::HttpCommandFinished(const int Id, const bool IsError)
+{
+
 }

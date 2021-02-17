@@ -26,7 +26,6 @@ MainWindow::MainWindow(QWidget *parent)
     ParamsHelper::SystemURI = QUrl(ServerURIString + Repository);
 
     connect(ui->AppsListWidget, SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(on_AppsListWidget_itemClicked(QListWidgetItem*)));
-    //connect(ui->AppsListWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(on_AppsListWidget_itemClicked(QListWidgetItem*)));
 
     BeginConnect();
 }
@@ -109,13 +108,7 @@ void MainWindow::on_HelpAction_triggered()
 {
     QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
 
-    QMessageBox HelpBox;
-
-    HelpBox.setText(tr("Помощь"));
-    HelpBox.setIcon(QMessageBox::Information);
-    HelpBox.setInformativeText(tr("Для выбора приложения кликните по его названию в списке"));
-
-    HelpBox.exec();
+    QMessageBox::information(this, tr("Помощь"), tr("Для выбора приложения кликните по его названию в списке"), QMessageBox::Ok);
 }
 
 void MainWindow::on_AboutAction_triggered()
@@ -141,7 +134,36 @@ void MainWindow::on_Closing_Dialog()
 
 void MainWindow::on_UpdateAction_triggered()
 {
+    try
+    {
+        NetHelper *HttpNetHelper = new NetHelper(QUrl("http://limowski.xyz:80"), false);
 
+        QString Version = HttpNetHelper->CheckUpdates("/downloads/LimFTPClient/Symbian_S60/LimFTPClientVersion.txt");
+
+        Version = Version.replace("\n", "");
+
+        QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
+
+        QMessageBox::StandardButton Result;
+
+        Result = QMessageBox::question(this, tr("Сообщение"), tr("Обновить?\n\nТекущая версия: ") + Version, QMessageBox::Yes|QMessageBox::No);
+
+        if (Result == QMessageBox::Yes)
+        {
+            if (!ParamsHelper::DownloadPath.isEmpty() && !ParamsHelper::DownloadPath.isNull())
+            {
+                HttpNetHelper->GetUpdates("/downloads/LimFTPClient/Symbian_S60/LimFTPClient.sis");
+            }
+            else
+            {
+                QMessageBox::warning(this, tr("Предупреждение"), tr("Отсутствует путь для сохранения файла"), QMessageBox::Ok);
+            }
+        }
+    }
+    catch(int)
+    {
+        QMessageBox::critical(this, tr("Ошибка"), tr("Не удалось обновить"), QMessageBox::Ok);
+    }
 }
 
 void MainWindow::BeginConnect()
@@ -171,14 +193,10 @@ void MainWindow::on_Listing_Complete(bool IsError)
     {
         QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
 
-        QMessageBox ErrorBox;
-
-        ErrorBox.setText(tr("Ошибка"));
-        ErrorBox.setIcon(QMessageBox::Critical);
-        ErrorBox.setInformativeText(tr("Не удалось подключиться к серверу"));
-
-        ErrorBox.exec();
+        QMessageBox::critical(this, tr("Ошибка"), tr("Не удалось подключиться к серверу"), QMessageBox::Ok);
     }
+
+    ParamsHelper::AppsList.clear();
 
     this->setCursor(Qt::ArrowCursor);
 }

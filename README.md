@@ -31,7 +31,7 @@ You need the following stuff to install this program:
 
  Click the update menu item. 
  After verification, the manager will offer to download the new version, if it exists.
- After downloading, close the program and run the file "Update.cab" from your Downloading directory
+ After downloading, close the program and run the file "Update.sis" from your Downloading directory
 
 ## Supported functions
  
@@ -48,6 +48,7 @@ You need the following stuff to install this program:
  - Nokia N95
  - Nokia E72
  - Nokia N8
+ - Nokia E90 (Not working)
 
 ## Contributing
 

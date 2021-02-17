@@ -11,3 +11,7 @@ QUrl ParamsHelper::CurrentURI = QUrl();
 QUrl ParamsHelper::AppURI = QUrl();
 QList<QString> ParamsHelper::AppsList = QList<QString>();
 QSysInfo::S60Version ParamsHelper::OSVersion = QSysInfo::S60Version();
+bool ParamsHelper::IsAutoInstall = false;
+bool ParamsHelper::IsOverwrite = false;
+bool ParamsHelper::IsRmPackage = false;
+QString ParamsHelper::DownloadPath = "";
