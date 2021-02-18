@@ -50,6 +50,7 @@ private:
     QUrl URI;
     QBuffer *Reader;
     QFile *Update;
+    QFile *Downloaded;
 };
 
 #endif // NETHELPER_H

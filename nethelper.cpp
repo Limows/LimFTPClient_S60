@@ -12,6 +12,7 @@ NetHelper::NetHelper(QUrl URI, bool IsFTP)
     {
         this->URI = URI;
         this->Ftp = new QFtp(this);
+        this->Downloaded = new QFile();
 
         connect(this->Ftp, SIGNAL(commandFinished(int,bool)), this, SLOT(FtpCommandFinished(int,bool)));
         connect(this->Ftp, SIGNAL(done(bool)), this, SLOT(FtpDone(bool)));
@@ -36,7 +37,16 @@ NetHelper::NetHelper(QUrl URI, bool IsFTP)
 
 void NetHelper::DownloadFile(QString DownloadDir, QString FileName)
 {
-    return;
+    QString FtpPath = this->URI.path();
+    QString FilePath = FtpPath + "/" + FileName;
+    QString DownloadFilePath = DownloadDir + "/" + FileName;
+
+    //connect(this->Ftp, SIGNAL(listInfo(QUrlInfo)), this, SLOT(AddToList(QUrlInfo)));
+
+    this->Downloaded = new QFile(DownloadFilePath);
+    this->Downloaded->open(QFile::ReadWrite);
+    this->Ftp->get(FilePath, this->Downloaded);
+    this->Ftp->close();
 }
 
 QString NetHelper::LoadInfo(QString AppName)
@@ -78,13 +88,12 @@ void NetHelper::FtpCommandFinished(const int Id, const bool IsError)
 
 void NetHelper::FtpDone(bool IsError)
 {
-    QFtp::Command Command = Ftp->currentCommand();
-    QString Status = "";
 
-    if (Command == QFtp::Close)
+    if(Downloaded->exists() && Downloaded->isOpen())
     {
-        Status = "Done";
+        Downloaded->close();
     }
+
 
     emit done(IsError);
 }
@@ -117,6 +126,11 @@ void NetHelper::GetUpdates(QString Source)
 
 void NetHelper::HttpDone(bool IsError)
 {
+    if(Update->exists() && Update->isOpen())
+    {
+        Update->close();
+    }
+
     emit done(IsError);
 }
 
