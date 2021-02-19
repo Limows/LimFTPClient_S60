@@ -35,3 +35,7 @@ Makefile*
 *.BAT
 *.bat
 *.inf
+
+# Lib directories
+
+lib/quazip/src/
