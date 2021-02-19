@@ -3,6 +3,7 @@
 
 #include "paramshelper.h"
 #include "nethelper.h"
+#include "iohelper.h"
 
 #include <QTextCodec>
 #include <QWidget>
@@ -28,6 +29,8 @@ private slots:
     void on_BackButton_clicked();
 
     void on_Downloading_Complete(bool IsError);
+
+    void on_Extracting_Complete(bool IsError);
 
 signals:
     void closed();

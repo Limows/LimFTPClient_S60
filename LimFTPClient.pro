@@ -19,9 +19,9 @@ symbian {
 
     RC_FILE += \
         Resources.rc
-}
 
     QT += network
+    QT += gui-private
 
     VERSION = "0.3.2"
 
@@ -39,7 +39,12 @@ symbian {
 
     LimFTPClient_template.pkg_prerules = vendorinfo
     DEPLOYMENT += LimFTPClient_template
-#}
+
+    INCLUDEPATH += "lib/quazip/include"
+
+    LIBS += -lezip
+    LIBS += -lquazip
+}
 
 # If your application uses the Qt Mobility libraries, uncomment
 # the following lines and add the respective components to the 

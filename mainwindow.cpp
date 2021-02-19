@@ -136,7 +136,7 @@ void MainWindow::on_UpdateAction_triggered()
 {
     try
     {
-        NetHelper *HttpNetHelper = new NetHelper(QUrl("http://limowski.xyz:80"), false);
+        NetHelper *HttpNetHelper = new NetHelper(QUrl("http://limowski.xyz:80"), NetHelper::HTTP);
 
         QString Version = HttpNetHelper->CheckUpdates("/downloads/LimFTPClient/Symbian_S60/LimFTPClientVersion.txt");
 

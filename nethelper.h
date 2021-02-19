@@ -16,9 +16,16 @@ class NetHelper : public QObject
     Q_OBJECT
 
 public:
+    enum NetType
+    {
+        FTP,
+        HTTP
+    };
+
+public:
     NetHelper();
 
-    NetHelper(QUrl URI, bool IsFTP = true);
+    NetHelper(QUrl URI, NetType Type = FTP);
 
     void DownloadFile(QString DownloadDir, QString FileName);
 

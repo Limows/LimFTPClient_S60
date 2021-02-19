@@ -6,9 +6,9 @@ NetHelper::NetHelper()
 
 }
 
-NetHelper::NetHelper(QUrl URI, bool IsFTP)
+NetHelper::NetHelper(QUrl URI, NetType Type)
 {
-    if (IsFTP)
+    if (Type == FTP)
     {
         this->URI = URI;
         this->Ftp = new QFtp(this);
@@ -28,8 +28,7 @@ NetHelper::NetHelper(QUrl URI, bool IsFTP)
         this->Reader = new QBuffer(this);
         this->Update = new QFile(ParamsHelper::DownloadPath + "/Update.sis");
 
-        //connect(this->Http, SIGNAL(requestFinished(int,bool)), this, SLOT(HttpCommandFinished(int,bool)));
-        //connect(this->Http, SIGNAL(done(bool)), SLOT(HttpDone(bool)));
+        connect(this->Http, SIGNAL(done(bool)), SLOT(HttpDone(bool)));
 
         this->Http->setHost(this->URI.host());
     }

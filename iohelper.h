@@ -1,25 +1,40 @@
 #ifndef IOHELPER_H
 #define IOHELPER_H
 
-#include <QString>
+#include "quazip/quazip.h"
+#include "quazip/quazipfile.h"
 
-class IOHelper
+#include <QString>
+#include <QObject>
+#include <QtCore>
+#include <QByteArray>
+#include <QFile>
+#include <QDir>
+
+
+
+class IOHelper : public QObject
 {
+    Q_OBJECT
+
 public:
     IOHelper();
 
-    static void LoadParameters();
+    void LoadParameters();
 
-    static QString ExtractToDirectory(QString CompressedFilePath, QString ExtractedFilePath);
+    QString ExtractToDirectory(QString CompressedFilePath, QString ExtractedFilePath);
 
-    static void CleanBuffer();
+    void CleanBuffer();
 
-    static void SaveParameters();
+    void SaveParameters();
 
-    static void RemoveParameters();
+    void RemoveParameters();
+
+signals:
+    void done(bool IsError);
 
 private:
-    static QString GetConfigPath();
+    QString GetConfigPath();
 };
 
 #endif // IOHELPER_H

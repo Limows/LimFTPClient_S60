@@ -21,6 +21,8 @@ AppDialog::AppDialog(QString CurrentAppName, QWidget *parent) :
 
     ui->TitleLabel->setText(this->AppName);
 
+    this->AppName = CurrentAppName.replace(" ", "_");
+
     ParamsHelper::AppURI = QUrl(ParamsHelper::SystemURI.toString() + "/" + this->AppName);
 }
 
@@ -33,6 +35,7 @@ void AppDialog::on_DownloadButton_clicked()
 {
     ParamsHelper::CurrentURI = ParamsHelper::AppURI;
     NetHelper *FtpNetHelper = new NetHelper(ParamsHelper::CurrentURI);
+    QEventLoop pause;
 
     QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
 
@@ -40,6 +43,7 @@ void AppDialog::on_DownloadButton_clicked()
     ui->StatusLabel->setText(tr("Идёт загрузка"));
 
     connect(FtpNetHelper, SIGNAL(done(bool)), this, SLOT(on_Downloading_Complete(bool)));
+    connect(FtpNetHelper, SIGNAL(done(bool)), &pause, SLOT(quit()));
 
     if (!ParamsHelper::DownloadPath.isEmpty() && !ParamsHelper::DownloadPath.isNull())
     {
@@ -50,7 +54,19 @@ void AppDialog::on_DownloadButton_clicked()
         QMessageBox::warning(this, tr("Предупреждение"), tr("Отсутствует путь для сохранения файла"), QMessageBox::Ok);
         ui->StatusLabel->setText(tr("Ошибка при загрузке"));
         disconnect(this, SLOT(on_Downloading_Complete(bool)));
+        return;
     }
+
+    pause.exec();
+
+    IOHelper *ZipHelper = new IOHelper();
+
+    this->setCursor(Qt::WaitCursor);
+    ui->StatusLabel->setText(tr("Идёт распаковка"));
+
+    connect(ZipHelper, SIGNAL(done(bool)), this, SLOT(on_Extracting_Complete(bool)));
+
+    ZipHelper->ExtractToDirectory(ParamsHelper::DownloadPath + "/" + this->AppName + ".zip", ParamsHelper::DownloadPath + "/" + this->AppName);
 }
 
 void AppDialog::on_Downloading_Complete(bool IsError)
@@ -63,6 +79,20 @@ void AppDialog::on_Downloading_Complete(bool IsError)
     {
         ui->StatusLabel->setText(tr("Ошибка при загрузке"));
         QMessageBox::critical(this, tr("Ошибка"), tr("Не удалось подключиться к серверу"), QMessageBox::Ok);
+    }
+
+    this->setCursor(Qt::ArrowCursor);
+}
+
+void AppDialog::on_Extracting_Complete(bool IsError)
+{
+    if (!IsError)
+    {
+        ui->StatusLabel->setText(tr("Успешно распаковано"));
+    }
+    else
+    {
+        ui->StatusLabel->setText(tr("Ошибка при распаковке"));
     }
 
     this->setCursor(Qt::ArrowCursor);
