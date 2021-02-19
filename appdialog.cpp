@@ -16,12 +16,9 @@ AppDialog::AppDialog(QString CurrentAppName, QWidget *parent) :
     ui->ContentLayout->setGeometry(*FormRect);
     ui->gridLayoutWidget->setGeometry(*FormRect);
     ui->TitleLabel->setAutoFillBackground(true);
+    ui->TitleLabel->setText(CurrentAppName);
 
-    this->AppName = CurrentAppName;
-
-    ui->TitleLabel->setText(this->AppName);
-
-    this->AppName = CurrentAppName.replace(" ", "_");
+    this->AppName = CurrentAppName.replace(' ', '_');
 
     ParamsHelper::AppURI = QUrl(ParamsHelper::SystemURI.toString() + "/" + this->AppName);
 }
@@ -33,40 +30,25 @@ AppDialog::~AppDialog()
 
 void AppDialog::on_DownloadButton_clicked()
 {
-    ParamsHelper::CurrentURI = ParamsHelper::AppURI;
-    NetHelper *FtpNetHelper = new NetHelper(ParamsHelper::CurrentURI);
-    QEventLoop pause;
-
     QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
 
     this->setCursor(Qt::WaitCursor);
     ui->StatusLabel->setText(tr("Идёт загрузка"));
 
-    connect(FtpNetHelper, SIGNAL(done(bool)), this, SLOT(on_Downloading_Complete(bool)));
-    connect(FtpNetHelper, SIGNAL(done(bool)), &pause, SLOT(quit()));
-
     if (!ParamsHelper::DownloadPath.isEmpty() && !ParamsHelper::DownloadPath.isNull())
     {
+        ParamsHelper::CurrentURI = ParamsHelper::AppURI;
+        NetHelper *FtpNetHelper = new NetHelper(ParamsHelper::CurrentURI);
+
+        connect(FtpNetHelper, SIGNAL(done(bool)), this, SLOT(on_Downloading_Complete(bool)));
+
         FtpNetHelper->DownloadFile(ParamsHelper::DownloadPath, this->AppName + ".zip");
     }
     else
     {
         QMessageBox::warning(this, tr("Предупреждение"), tr("Отсутствует путь для сохранения файла"), QMessageBox::Ok);
         ui->StatusLabel->setText(tr("Ошибка при загрузке"));
-        disconnect(this, SLOT(on_Downloading_Complete(bool)));
-        return;
     }
-
-    pause.exec();
-
-    IOHelper *ZipHelper = new IOHelper();
-
-    this->setCursor(Qt::WaitCursor);
-    ui->StatusLabel->setText(tr("Идёт распаковка"));
-
-    connect(ZipHelper, SIGNAL(done(bool)), this, SLOT(on_Extracting_Complete(bool)));
-
-    ZipHelper->ExtractToDirectory(ParamsHelper::DownloadPath + "/" + this->AppName + ".zip", ParamsHelper::DownloadPath + "/" + this->AppName);
 }
 
 void AppDialog::on_Downloading_Complete(bool IsError)
@@ -74,14 +56,23 @@ void AppDialog::on_Downloading_Complete(bool IsError)
     if (!IsError)
     {
         ui->StatusLabel->setText(tr("Успешно загружено"));
+        this->setCursor(Qt::ArrowCursor);
+
+        this->setCursor(Qt::WaitCursor);
+        ui->StatusLabel->setText(tr("Идёт распаковка"));
+
+        IOHelper *ZipHelper = new IOHelper();
+
+        connect(ZipHelper, SIGNAL(done(bool)), this, SLOT(on_Extracting_Complete(bool)));
+
+        ZipHelper->ExtractToDirectory(ParamsHelper::DownloadPath + "/" + this->AppName + ".zip", ParamsHelper::DownloadPath + "/" + this->AppName);
     }
     else
     {
+        this->setCursor(Qt::ArrowCursor);
         ui->StatusLabel->setText(tr("Ошибка при загрузке"));
         QMessageBox::critical(this, tr("Ошибка"), tr("Не удалось подключиться к серверу"), QMessageBox::Ok);
     }
-
-    this->setCursor(Qt::ArrowCursor);
 }
 
 void AppDialog::on_Extracting_Complete(bool IsError)

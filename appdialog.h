@@ -20,7 +20,8 @@ class AppDialog : public QWidget
     Q_OBJECT
 
 public:
-    explicit AppDialog(QString CurrentAppName = "Application", QWidget *parent = 0);
+    explicit AppDialog(QString AppName = "Application", QWidget *parent = 0);
+
     ~AppDialog();
 
 private slots:

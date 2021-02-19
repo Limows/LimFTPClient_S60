@@ -237,7 +237,7 @@ void MainWindow::on_AppsListWidget_itemClicked(QListWidgetItem *item)
     QString AppName = item->text();
     AppDialog *NewAppDialog = new AppDialog(AppName);
 
-    NewAppDialog->showFullScreen();
-
     connect(NewAppDialog, SIGNAL(closed()), this, SLOT(on_Closing_Dialog()));
+
+    NewAppDialog->showFullScreen();
 }
