@@ -3,6 +3,7 @@
 
 #include "quazip/quazip.h"
 #include "quazip/quazipfile.h"
+#include "paramshelper.h"
 
 #include <QString>
 #include <QObject>
@@ -10,6 +11,7 @@
 #include <QByteArray>
 #include <QFile>
 #include <QDir>
+#include <QDataStream>
 
 
 
@@ -20,15 +22,15 @@ class IOHelper : public QObject
 public:
     IOHelper();
 
-    void LoadParameters();
+    static void LoadParameters();
 
     QString ExtractToDirectory(QString CompressedFilePath, QString ExtractedFilePath);
 
     void CleanBuffer();
 
-    void SaveParameters();
+    static void SaveParameters();
 
-    void RemoveParameters();
+    static void RemoveParameters();
 
 signals:
     void done(bool IsError);

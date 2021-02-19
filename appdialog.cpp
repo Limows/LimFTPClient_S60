@@ -15,6 +15,7 @@ AppDialog::AppDialog(QString CurrentAppName, QWidget *parent) :
     this->setGeometry(*FormRect);
     ui->ContentLayout->setGeometry(*FormRect);
     ui->gridLayoutWidget->setGeometry(*FormRect);
+    ui->LogoView->setGeometry(ui->LogoView->x(), ui->LogoView->y(), ui->LogoView->width(), ui->LogoView->width());
     ui->TitleLabel->setAutoFillBackground(true);
     ui->TitleLabel->setText(CurrentAppName);
 

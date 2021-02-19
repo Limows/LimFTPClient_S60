@@ -15,3 +15,5 @@ bool ParamsHelper::IsAutoInstall = false;
 bool ParamsHelper::IsOverwrite = false;
 bool ParamsHelper::IsRmPackage = false;
 QString ParamsHelper::DownloadPath = "";
+QString ParamsHelper::InstallPath = "C:/";
+ulong ParamsHelper::TempSize = 0;

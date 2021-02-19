@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "paramsdialog.h"
 #include "aboutdialog.h"
+#include "iohelper.h"
 
 #include <QtGui/QApplication>
 #include <Qt>
@@ -19,5 +20,12 @@ int main(int argc, char *argv[])
     mainWindow.setWindowIcon(QIcon(":/icons/logo.ico"));
 
     mainWindow.showFullScreen();
-    return app.exec();
+
+    IOHelper::LoadParameters();
+
+    int appresult = app.exec();
+
+    IOHelper::SaveParameters();
+
+    return appresult;
 }

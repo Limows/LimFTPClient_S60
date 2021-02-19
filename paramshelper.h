@@ -18,20 +18,17 @@ public:
     static QString ConfigPath;
     static QSysInfo::S60Version OSVersion;
     static QList<QString> AppsList;
-    static bool IsThreadAlive;
-    static bool IsThreadError;
-    static bool IsThreadWaiting;
-    //static Exception ThreadException;
-    static QString ThreadMessage;
     static bool IsAutoInstall;
     static bool IsRmPackage;
     static bool IsOverwrite;
-    static bool IsUninstalling;
+    static ulong TempSize;
 
 public:
     ParamsHelper();
 
     static double BytesToMegs(ulong Bytes);
+
+    static ulong MegsToBytes(double Megs);
 };
 
 #endif // PARAMSHELPER_H
