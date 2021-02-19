@@ -8,6 +8,9 @@ You need the following stuff to build this program:
 
  - QtSDK for Symbian 1.1.2
  - Symbian S60 SDK
+ - QuaZip (see lib folder)
+
+First you need to build a QuaZip library.
  
 ## Installation
 
@@ -34,6 +37,10 @@ You need the following stuff to install this program:
  After downloading, close the program and run the file "Update.sis" from your Downloading directory
 
 ## Supported functions
+
+ - Listing available for device applications
+ - Downloading app package
+ - Unpacking package
  
 ## OS Support
 
@@ -42,6 +49,8 @@ You need the following stuff to install this program:
  - Symbian^3
  
 ## Used projects
+
+ - QuaZip (version 0.5)
 
 ## Tested devices
 
