@@ -1,5 +1,23 @@
 # Changelog
 
+## [v0.4.0] - (19.02.21)
+
+### Added
+
+ - App download function
+ - QuaZip lib
+ - Package extract function
+
+### Changed
+
+ - Icon
+ - Readme
+ - Slightly UI
+	
+### Fixed
+
+ - Update file busy
+
 ## [v0.3.2] - (17.02.21)
 
 ### Added
