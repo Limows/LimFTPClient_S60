@@ -241,3 +241,14 @@ void MainWindow::on_AppsListWidget_itemClicked(QListWidgetItem *item)
 
     NewAppDialog->showFullScreen();
 }
+
+void MainWindow::on_InstalledAction_triggered()
+{
+    InstalledForm *NewInstalledForm = new InstalledForm();
+
+    NewInstalledForm->setWindowIcon(QIcon(":/icons/logo.ico"));
+
+    NewInstalledForm->showFullScreen();
+
+    connect(NewInstalledForm, SIGNAL(closed()), this, SLOT(on_Closing_Dialog()));
+}

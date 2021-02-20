@@ -1797,6 +1797,7 @@
     </property>
     <addaction name="ParamsAction"/>
     <addaction name="RefreshAction"/>
+    <addaction name="InstalledAction"/>
    </widget>
    <widget class="QMenu" name="RefMenu">
     <property name="title">
@@ -1835,6 +1836,11 @@
   <action name="UpdateAction">
    <property name="text">
     <string>Обновления</string>
+   </property>
+  </action>
+  <action name="InstalledAction">
+   <property name="text">
+    <string>Установленные</string>
    </property>
   </action>
  </widget>

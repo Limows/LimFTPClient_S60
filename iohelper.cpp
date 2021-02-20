@@ -39,7 +39,7 @@ QString IOHelper::ExtractToDirectory(QString CompressedFilePath, QString Extract
 
 void IOHelper::SaveParameters()
 {
-    QFile *ConfigFile = new QFile("/Data/.config/AppManager.conf");
+    QFile *ConfigFile = new QFile(GetConfigPath("/") + "AppManager.conf");
     ConfigFile->open(QFile::WriteOnly);
 
     QDataStream Config(ConfigFile);
@@ -56,7 +56,7 @@ void IOHelper::SaveParameters()
 
 void IOHelper::LoadParameters()
 {
-    QFile *ConfigFile = new QFile("/Data/.config/AppManager.conf");
+    QFile *ConfigFile = new QFile(GetConfigPath("/") + "AppManager.conf");
     ConfigFile->open(QFile::ReadOnly);
 
     QDataStream Config(ConfigFile);
@@ -73,7 +73,31 @@ void IOHelper::LoadParameters()
 
 void IOHelper::RemoveParameters()
 {
-    QFile *ConfigFile = new QFile("/Data/.config/AppManager.conf");
+    QFile *ConfigFile = new QFile(GetConfigPath("/") + "AppManager.conf");
 
     ConfigFile->remove();
+}
+
+QString IOHelper::GetConfigPath(QString Path)
+{
+    QDir *ConfigDir = new QDir(Path);
+
+    QList<QString> DirsList = ConfigDir->entryList();
+
+    foreach(QString dir, DirsList)
+    {
+        if (dir == ".config")
+        {
+            return "/.config/";
+        }
+
+        /*
+        if (dir == "Data")
+        {
+            GetConfigPath("/Data");
+        }
+        */
+    }
+
+    return "/Data/.config/";
 }

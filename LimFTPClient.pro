@@ -21,9 +21,8 @@ symbian {
         Resources.rc
 
     QT += network
-    QT += gui-private
 
-    VERSION = "0.4.0"
+    VERSION = "0.4.1"
 
     DEFINES += APP_VERSION=\"\\\"$${VERSION}\\\"\"
 
@@ -61,7 +60,8 @@ SOURCES += \
     nethelper.cpp \
     iohelper.cpp \
     systemhelper.cpp \
-    appdialog.cpp
+    appdialog.cpp \
+    installedform.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -71,13 +71,15 @@ HEADERS += \
     nethelper.h \
     iohelper.h \
     systemhelper.h \
-    appdialog.h
+    appdialog.h \
+    installedform.h
 
 FORMS += \
     mainwindow.ui \
     paramsdialog.ui \
     aboutdialog.ui \
-    appdialog.ui
+    appdialog.ui \
+    installedform.ui
 
 RESOURCES += \
     Resources.rc

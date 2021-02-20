@@ -12,6 +12,7 @@
 #include <QFile>
 #include <QDir>
 #include <QDataStream>
+#include <QList>
 
 
 
@@ -36,7 +37,7 @@ signals:
     void done(bool IsError);
 
 private:
-    QString GetConfigPath();
+    static QString GetConfigPath(QString Path);
 };
 
 #endif // IOHELPER_H

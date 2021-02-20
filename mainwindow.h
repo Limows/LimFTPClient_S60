@@ -6,6 +6,7 @@
 #include "aboutdialog.h"
 #include "appdialog.h"
 #include "nethelper.h"
+#include "installedform.h"
 
 #include <QtGui/QMainWindow>
 #include <QTextCodec>
@@ -57,6 +58,8 @@ private slots:
     void on_Listing_Complete(bool IsError);
 
     void on_AppsListWidget_itemClicked(QListWidgetItem *item);
+
+    void on_InstalledAction_triggered();
 
 private:
     Ui::MainWindow *ui;
