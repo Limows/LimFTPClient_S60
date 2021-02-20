@@ -7,63 +7,82 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="44px"
    version="1.1"
-   id="svg8"
+   viewBox="0 0 44 44"
+   width="44px"
+   x="0px"
+   y="0px"
+   id="svg2"
    inkscape:version="1.0.2 (e86c870879, 2021-01-15)"
    sodipodi:docname="LimFTPClient.svg">
-  <defs
-     id="defs2" />
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="5.6"
-     inkscape:cx="36.193539"
-     inkscape:cy="44.749748"
-     inkscape:document-units="mm"
-     inkscape:current-layer="svg8"
-     inkscape:document-rotation="0"
-     showgrid="false"
-     inkscape:window-width="1440"
-     inkscape:window-height="837"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1" />
   <metadata
-     id="metadata5">
+     id="metadata18">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <circle
-     style="fill:#0000ff;stroke-width:0.0381383"
-     id="path11"
-     cx="32"
-     cy="32"
-     r="32" />
-  <rect
-     style="fill:#ffffff"
-     id="rect24"
-     width="6"
-     height="40"
-     x="22.999998"
-     y="10.178572"
-     rx="2.7755576e-17" />
-  <rect
-     style="fill:#ffffff;stroke-width:1.07606"
-     id="rect26"
-     width="22"
-     height="6"
-     x="22.999998"
-     y="44.178574"
-     rx="3.2138061e-17" />
+  <defs
+     id="defs16">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 22 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="44 : 22 : 1"
+       inkscape:persp3d-origin="22 : 14.666667 : 1"
+       id="perspective2836" />
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1440"
+     inkscape:window-height="837"
+     id="namedview14"
+     showgrid="false"
+     inkscape:zoom="10.727273"
+     inkscape:cx="13.237898"
+     inkscape:cy="22.292741"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g3"
+     inkscape:document-rotation="0" />
+  <g
+     transform="matrix(0.18308778,0,0,0.18308778,6.6100946,3.2385199)"
+     id="g3">
+    <circle
+       style="fill:#0000ff;stroke-width:9.74239"
+       id="path114"
+       cx="84.057526"
+       cy="102.4726"
+       r="120.16094" />
+    <rect
+       style="fill:#ffffff;stroke-width:5.46186"
+       id="rect116"
+       width="21.847445"
+       height="136.54652"
+       x="54.017288"
+       y="34.199341"
+       rx="1.5159722e-16" />
+    <rect
+       style="fill:#ffffff;stroke-width:6.42345"
+       id="rect118"
+       width="81.927917"
+       height="21.847445"
+       x="54.017288"
+       y="148.89842"
+       rx="1.9057323e-16" />
+  </g>
 </svg>
