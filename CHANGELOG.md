@@ -1,5 +1,22 @@
 # Changelog
 
+## [v0.4.2] - (21.02.21)
+
+### Added
+
+ - GetConfigPath
+ - Installed Form (testing)
+
+### Changed
+
+ - Icon
+ - Unpacking now works asynchronously
+ - Code cleaned up
+	
+### Fixed
+
+ - Parameters now saves
+
 ## [v0.4.0] - (19.02.21)
 
 ### Added
@@ -40,6 +57,7 @@
 
  - Initial release
 
+[v0.4.2]: https://github.com/Limows/LimFTPClient_S60/releases/tag/v0.4.2
 [v0.4.0]: https://github.com/Limows/LimFTPClient_S60/releases/tag/v0.4.0
 [v0.3.2]: https://github.com/Limows/LimFTPClient_S60/releases/tag/v0.3.2
 [v0.3.0]: https://github.com/Limows/LimFTPClient_S60/releases/tag/v0.3.0

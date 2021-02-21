@@ -8,7 +8,7 @@ You need the following stuff to build this program:
 
  - QtSDK for Symbian 1.1.2
  - Symbian S60 SDK
- - QuaZip (see lib folder)
+ - QuaZip (you can get it [here])
 
 First you need to build a QuaZip library.
  
@@ -66,3 +66,6 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/Limows
 ## License
 
 This project is licensed under the terms of the [2-Clause BSD License](https://opensource.org/licenses/BSD-2-Clause).
+
+
+[here]: https://github.com/stachenov/quazip/tree/936844eb691491f7a9cbfd842a4326b9d384441f
