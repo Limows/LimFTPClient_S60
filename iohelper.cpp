@@ -88,16 +88,14 @@ QString IOHelper::GetConfigPath(QString Path)
     {
         if (dir == ".config")
         {
-            return "/.config/";
+            return Path + ".config/";
         }
 
-        /*
-        if (dir == "Data")
+        if (dir == "Data" && dir == "data")
         {
-            GetConfigPath("/Data");
+            GetConfigPath("/" + dir + "/");
         }
-        */
     }
 
-    return "/Data/.config/";
+    return "/";
 }
