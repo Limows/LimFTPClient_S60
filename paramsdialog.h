@@ -4,7 +4,6 @@
 #include "paramshelper.h"
 
 #include <QWidget>
-#include <QtCore/QCoreApplication>
 #include <QDesktopWidget>
 #include <QObject>
 #include <QFileDialog>

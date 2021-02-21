@@ -64,7 +64,7 @@ void AppDialog::on_Downloading_Complete(bool IsError)
 
         IOHelper *ZipHelper = new IOHelper();
 
-        connect(ZipHelper, SIGNAL(done(bool)), this, SLOT(on_Extracting_Complete(bool)));
+        connect(ZipHelper, SIGNAL(unzip_done(bool, QString)), this, SLOT(on_Extracting_Complete(bool, QString)));
 
         ZipHelper->ExtractToDirectory(ParamsHelper::DownloadPath + "/" + this->AppName + ".zip", ParamsHelper::DownloadPath + "/" + this->AppName);
     }
@@ -76,7 +76,7 @@ void AppDialog::on_Downloading_Complete(bool IsError)
     }
 }
 
-void AppDialog::on_Extracting_Complete(bool IsError)
+void AppDialog::on_Extracting_Complete(bool IsError, QString ExtractedFilePath)
 {
     if (!IsError)
     {

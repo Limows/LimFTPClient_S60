@@ -7,7 +7,6 @@
 
 #include <QTextCodec>
 #include <QWidget>
-#include <QtCore/QCoreApplication>
 #include <QDesktopWidget>
 #include <QMessageBox>
 
@@ -31,7 +30,7 @@ private slots:
 
     void on_Downloading_Complete(bool IsError);
 
-    void on_Extracting_Complete(bool IsError);
+    void on_Extracting_Complete(bool IsError, QString ExtractedFilePath);
 
 signals:
     void closed();

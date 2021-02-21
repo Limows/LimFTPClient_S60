@@ -3,7 +3,6 @@
 
 #include <QTextCodec>
 #include <QWidget>
-#include <QtCore/QCoreApplication>
 #include <QDesktopWidget>
 
 namespace Ui {

@@ -40,7 +40,7 @@ ParamsDialog::ParamsDialog(QWidget *parent) :
     ui->OverwriteDirsBox->setChecked(ParamsHelper::IsOverwrite);
     ui->RmPackageBox->setChecked(ParamsHelper::IsRmPackage);
     ui->DownloadPathBox->setText(ParamsHelper::DownloadPath);
-    ui->TempSizeBox->setText(QString::number(ParamsHelper::TempSize));
+    ui->TempSizeBox->setText(QString::number(ParamsHelper::BytesToMegs(ParamsHelper::TempSize)));
 }
 
 ParamsDialog::~ParamsDialog()
@@ -79,7 +79,7 @@ void ParamsDialog::on_SaveButton_clicked()
     ParamsHelper::IsAutoInstall = ui->AutoInstallBox->isChecked();
     ParamsHelper::IsOverwrite = ui->OverwriteDirsBox->isChecked();
     ParamsHelper::IsRmPackage = ui->RmPackageBox->isChecked();
-    ParamsHelper::TempSize = ui->TempSizeBox->text().toULong();
+    ParamsHelper::TempSize = ParamsHelper::MegsToBytes(ui->TempSizeBox->text().toDouble());
     this->close();
     emit closed();
 }

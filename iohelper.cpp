@@ -5,9 +5,11 @@ IOHelper::IOHelper()
 
 }
 
-QString IOHelper::ExtractToDirectory(QString CompressedFilePath, QString ExtractedFilePath)
+void IOHelper::ExtractAsync()
 {
-    QuaZip UnZip(CompressedFilePath);
+    QString CompressedFilePath = this->Compressed;
+    QString ExtractedFilePath = this->Extracted;
+    QuaZip UnZip(CompressedFilePath);          
     QDir ExtractedDir;
     bool IsError = false;
 
@@ -32,9 +34,20 @@ QString IOHelper::ExtractToDirectory(QString CompressedFilePath, QString Extract
 
     UnZip.close();
 
-    emit done(IsError);
+    emit unzip_done(IsError, ExtractedFilePath);
+}
 
-    return ExtractedFilePath;
+void IOHelper::ExtractToDirectory(QString CompressedFilePath, QString ExtractedFilePath)
+{
+    QThread *UnZipThread = new QThread(this);
+
+    this->Compressed = CompressedFilePath;
+    this->Extracted = ExtractedFilePath;
+    moveToThread(UnZipThread);
+
+    connect(UnZipThread, SIGNAL(started()), this, SLOT(ExtractAsync()));
+
+    UnZipThread->start();
 }
 
 void IOHelper::SaveParameters()
@@ -91,9 +104,9 @@ QString IOHelper::GetConfigPath(QString Path)
             return Path + ".config/";
         }
 
-        if (dir == "Data" && dir == "data")
+        if (dir == "Data" || dir == "data")
         {
-            GetConfigPath("/" + dir + "/");
+            return GetConfigPath("/" + dir + "/");
         }
     }
 

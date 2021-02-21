@@ -12,8 +12,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     QRect *FormRect = new QRect(0, 0, width, (int)(height*0.92));
 
-    //int menu_height = this->menuBar()->contentsRect().height();
-
     this->setGeometry(*FormRect);
 
     ui->GridLayout->setGeometry(*FormRect);
@@ -246,6 +244,11 @@ void MainWindow::on_InstalledAction_triggered()
 {
     InstalledForm *NewInstalledForm = new InstalledForm();
 
+    Qt::WindowFlags flags;
+    flags |= Qt::WindowSoftkeysVisibleHint;
+    flags &= ~Qt::WindowSoftkeysRespondHint;
+
+    NewInstalledForm->setWindowFlags(flags);
     NewInstalledForm->setWindowIcon(QIcon(":/icons/logo.ico"));
 
     NewInstalledForm->showFullScreen();

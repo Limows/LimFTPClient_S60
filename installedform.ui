@@ -438,7 +438,7 @@
     </rect>
    </property>
    <layout class="QGridLayout" name="ContentLayout">
-    <item row="0" column="0">
+    <item row="0" column="0" colspan="3">
      <widget class="QLabel" name="Label">
       <property name="font">
        <font>
@@ -449,14 +449,14 @@
        </font>
       </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string>Установленные приложения</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignBottom|Qt::AlignHCenter</set>
       </property>
      </widget>
     </item>
-    <item row="1" column="0">
+    <item row="1" column="0" colspan="3">
      <widget class="QListWidget" name="listWidget">
       <property name="palette">
        <palette>
@@ -875,12 +875,44 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="0">
+    <item row="2" column="1">
      <widget class="QLabel" name="MemLabel">
       <property name="text">
        <string>Доступно памяти:</string>
       </property>
      </widget>
+    </item>
+    <item row="2" column="0">
+     <spacer name="LeftSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>6</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="2" column="2">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>6</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
     </item>
    </layout>
   </widget>

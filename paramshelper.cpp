@@ -17,3 +17,13 @@ bool ParamsHelper::IsRmPackage = false;
 QString ParamsHelper::DownloadPath = "";
 QString ParamsHelper::InstallPath = "C:/";
 ulong ParamsHelper::TempSize = 0;
+
+double ParamsHelper::BytesToMegs(ulong Bytes)
+{
+    return ((double)Bytes / 1024 / 1024);
+}
+
+ulong ParamsHelper::MegsToBytes(double Megs)
+{
+    return (ulong)(Megs * 1024 * 1024);
+}

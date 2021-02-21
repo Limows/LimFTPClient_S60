@@ -22,9 +22,9 @@ symbian {
 
     QT += network
 
-    VERSION = "0.4.1"
+    VERSION = "0.4.2"
 
-    DEFINES += APP_VERSION=\"\\\"$${VERSION}\\\"\"
+    DEFINES += APP_VERSION=\"\\\"$${VERSION}-debug\\\"\"
 
     VENDOR = "LimSoft"
 

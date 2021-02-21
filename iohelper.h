@@ -13,6 +13,7 @@
 #include <QDir>
 #include <QDataStream>
 #include <QList>
+#include <QThread>
 
 
 
@@ -25,19 +26,31 @@ public:
 
     static void LoadParameters();
 
-    QString ExtractToDirectory(QString CompressedFilePath, QString ExtractedFilePath);
-
-    void CleanBuffer();
+    static void CleanBuffer();
 
     static void SaveParameters();
 
     static void RemoveParameters();
 
+    void ExtractToDirectory(QString CompressedFilePath, QString ExtractedFilePath);
+
+private:
+    QString Compressed;
+
+    QString Extracted;
+
+private slots:
+    void ExtractAsync();
+
 signals:
-    void done(bool IsError);
+    void unzip_done(bool IsError, QString ExtractedFilePath);
 
 private:
     static QString GetConfigPath(QString Path);
+
+    static ulong GetDirectorySize(QString Path);
+
+    void ExtractAsync(QString CompressedFilePath, QString ExtractedFilePath);
 };
 
 #endif // IOHELPER_H
