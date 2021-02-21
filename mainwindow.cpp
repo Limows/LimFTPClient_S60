@@ -6,16 +6,16 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
+
     const QRect ScreenRect = QApplication::desktop()->screenGeometry(this);
+
     int height = ScreenRect.height();
     int width = ScreenRect.width();
-
     QRect *FormRect = new QRect(0, 0, width, (int)(height*0.92));
 
     this->setGeometry(*FormRect);
-
     ui->GridLayout->setGeometry(*FormRect);
-
     ui->gridLayoutWidget->setGeometry(*FormRect);
 
     QString ServerURIString = ParamsHelper::ServerURI.toString();
@@ -104,8 +104,6 @@ void MainWindow::on_RefreshAction_triggered()
 
 void MainWindow::on_HelpAction_triggered()
 {
-    QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
-
     QMessageBox::information(this, tr("Помощь"), tr("Для выбора приложения кликните по его названию в списке"), QMessageBox::Ok);
 }
 
@@ -139,8 +137,6 @@ void MainWindow::on_UpdateAction_triggered()
         QString Version = HttpNetHelper->CheckUpdates("/downloads/LimFTPClient/Symbian_S60/LimFTPClientVersion.txt");
 
         Version = Version.replace("\n", "");
-
-        QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
 
         QMessageBox::StandardButton Result;
 
@@ -189,8 +185,6 @@ void MainWindow::on_Listing_Complete(bool IsError)
     }
     else
     {
-        QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
-
         QMessageBox::critical(this, tr("Ошибка"), tr("Не удалось подключиться к серверу"), QMessageBox::Ok);
     }
 

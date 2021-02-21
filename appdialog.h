@@ -4,6 +4,7 @@
 #include "paramshelper.h"
 #include "nethelper.h"
 #include "iohelper.h"
+#include "systemhelper.h"
 
 #include <QTextCodec>
 #include <QWidget>
@@ -31,6 +32,8 @@ private slots:
     void on_Downloading_Complete(bool IsError);
 
     void on_Extracting_Complete(bool IsError, QString ExtractedFilePath);
+
+    void on_Installing_Complete(bool IsError);
 
 signals:
     void closed();

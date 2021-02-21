@@ -8,6 +8,7 @@
 #include <QObject>
 #include <QFileDialog>
 #include <QPalette>
+#include <QTextCodec>
 
 namespace Ui {
     class ParamsDialog;

@@ -7,15 +7,14 @@ AppDialog::AppDialog(QString CurrentAppName, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    const QRect ScreenRect = QApplication::desktop()->screenGeometry();
-    int height = ScreenRect.height();
-    int width = ScreenRect.width();
-    QRect *FormRect = new QRect(0, 0, width, height);
+    QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
 
-    this->setGeometry(*FormRect);
-    ui->ContentLayout->setGeometry(*FormRect);
-    ui->gridLayoutWidget->setGeometry(*FormRect);
-    ui->LogoView->setGeometry(ui->LogoView->x(), ui->LogoView->y(), ui->LogoView->width(), ui->LogoView->width());
+    const QRect ScreenRect = QApplication::desktop()->screenGeometry();
+
+    this->setGeometry(ScreenRect);
+    ui->ContentLayout->setGeometry(ScreenRect);
+    ui->gridLayoutWidget->setGeometry(ScreenRect);
+
     ui->TitleLabel->setAutoFillBackground(true);
     ui->TitleLabel->setText(CurrentAppName);
 
@@ -31,8 +30,6 @@ AppDialog::~AppDialog()
 
 void AppDialog::on_DownloadButton_clicked()
 {
-    QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
-
     this->setCursor(Qt::WaitCursor);
     ui->StatusLabel->setText(tr("Идёт загрузка"));
 
@@ -81,10 +78,34 @@ void AppDialog::on_Extracting_Complete(bool IsError, QString ExtractedFilePath)
     if (!IsError)
     {
         ui->StatusLabel->setText(tr("Успешно распаковано"));
+        this->setCursor(Qt::ArrowCursor);
+
+        this->setCursor(Qt::WaitCursor);
+        ui->StatusLabel->setText(tr("Идёт установка"));
+
+        SystemHelper *InstallHelper = new SystemHelper();
+
+        connect(InstallHelper, SIGNAL(done(bool)), this, SLOT(on_Installing_Complete(bool)));
+
+        InstallHelper->AppInstall(ExtractedFilePath, ParamsHelper::InstallPath, this->AppName, ParamsHelper::IsOverwrite);
     }
     else
     {
+        this->setCursor(Qt::ArrowCursor);
         ui->StatusLabel->setText(tr("Ошибка при распаковке"));
+    }
+
+}
+
+void AppDialog::on_Installing_Complete(bool IsError)
+{
+    if (!IsError)
+    {
+        ui->StatusLabel->setText(tr("Успешно установлено"));
+    }
+    else
+    {
+        ui->StatusLabel->setText(tr("Ошибка при установке"));
     }
 
     this->setCursor(Qt::ArrowCursor);

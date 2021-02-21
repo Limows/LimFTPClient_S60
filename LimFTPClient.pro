@@ -15,12 +15,17 @@ symbian:TARGET.UID3 = 0xEE3EB787
 
 # Allow network access on Symbian
 symbian {
-    TARGET.CAPABILITY += NetworkServices
+    TARGET.CAPABILITY += \
+        NetworkServices \
+        TrustedUI
 
     RC_FILE += \
         Resources.rc
 
-    QT += network
+    QT += \
+        core \
+        network \
+        gui
 
     VERSION = "0.4.2"
 
@@ -41,8 +46,14 @@ symbian {
 
     INCLUDEPATH += "lib/quazip/include"
 
-    LIBS += -lezip
-    LIBS += -lquazip
+    LIBS += \
+        -lezip \
+        -lquazip \
+    #    -lswinstcli \
+        -lcommdb \
+        -lapparc \
+        -lefsrv \
+        -lapgrfx
 }
 
 # If your application uses the Qt Mobility libraries, uncomment
@@ -89,5 +100,4 @@ include(deployment.pri)
 qtcAddDeployment()
 
 OTHER_FILES += \
-    LimFTPClient.svg \
     LimFTPClient.svg

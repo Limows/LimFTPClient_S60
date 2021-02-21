@@ -10,15 +10,13 @@ InstalledForm::InstalledForm(QWidget *parent) :
     QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
 
     const QRect ScreenRect = QApplication::desktop()->screenGeometry(this);
+
     int height = ScreenRect.height();
     int width = ScreenRect.width();
-
     QRect *FormRect = new QRect(0, 0, width, (int)(height*0.92));
 
     this->setGeometry(*FormRect);
-
     ui->ContentLayout->setGeometry(*FormRect);
-
     ui->gridLayoutWidget->setGeometry(*FormRect);
 
     QAction *RightOption = new QAction("Exit", this);
