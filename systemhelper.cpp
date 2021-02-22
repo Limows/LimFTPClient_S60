@@ -19,3 +19,17 @@ uint SystemHelper::GetStorageSpace(QString Path)
 {
 
 }
+
+QList<QString> SystemHelper::GetAllStorages()
+{
+    QFileInfoList Drives = QDir::drives();
+    QList<QString> DrivesNames = QList<QString>();
+
+    foreach(QFileInfo drive, Drives)
+    {
+        QString DriveName = drive.path();
+        DrivesNames.append(DriveName);
+    }
+
+    return DrivesNames;
+}

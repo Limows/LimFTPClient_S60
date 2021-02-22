@@ -4,6 +4,10 @@
 #include <QString>
 #include <QList>
 #include <QObject>
+#include <QDir>
+#include <QFile>
+#include <QFileInfo>
+#include <QFileInfoList>
 //#include <SWInstApi.h>
 //#include <SWInstDefs.h>
 
@@ -23,6 +27,8 @@ public:
     void AppUninstall(QString AppName);
 
     static uint GetStorageSpace(QString Path);
+
+    static QList<QString> GetAllStorages();
 
 signals:
     void done(bool IsError);

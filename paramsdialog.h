@@ -3,6 +3,7 @@
 
 #include "paramshelper.h"
 #include "iohelper.h"
+#include "systemhelper.h"
 
 #include <QWidget>
 #include <QDesktopWidget>
