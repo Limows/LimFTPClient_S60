@@ -10,6 +10,7 @@
 #include <QtCore>
 #include <QByteArray>
 #include <QFile>
+#include <QFileInfo>
 #include <QDir>
 #include <QDataStream>
 #include <QList>
@@ -34,6 +35,8 @@ public:
 
     void ExtractToDirectory(QString CompressedFilePath, QString ExtractedFilePath);
 
+    static ulong GetDirectorySize(QString Path);
+
 private:
     QString Compressed;
 
@@ -47,8 +50,6 @@ signals:
 
 private:
     static QString GetConfigPath(QString Path);
-
-    static ulong GetDirectorySize(QString Path);
 
     void ExtractAsync(QString CompressedFilePath, QString ExtractedFilePath);
 };

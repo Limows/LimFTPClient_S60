@@ -13,7 +13,12 @@ symbian:TARGET.UID3 = 0xEE3EB787
 # and 0x2002CCCF value if protected UID is given to the application
 #symbian:DEPLOYMENT.installer_header = 0x2002CCCF
 
-# Allow network access on Symbian
+# If your application uses the Qt Mobility libraries, uncomment
+# the following lines and add the respective components to the
+# MOBILITY variable.
+#CONFIG += mobility
+#MOBILITY +=
+
 symbian {
     TARGET.CAPABILITY += \
         NetworkServices \
@@ -27,9 +32,9 @@ symbian {
         network \
         gui
 
-    VERSION = "0.4.2"
+    VERSION = "0.4.3"
 
-    DEFINES += APP_VERSION=\"\\\"$${VERSION}\\\"\"
+    DEFINES += APP_VERSION=\"\\\"$${VERSION}-debug\\\"\"
 
     VENDOR = "LimSoft"
 
@@ -55,12 +60,6 @@ symbian {
         -lefsrv \
         -lapgrfx
 }
-
-# If your application uses the Qt Mobility libraries, uncomment
-# the following lines and add the respective components to the 
-# MOBILITY variable. 
-# CONFIG += mobility
-# MOBILITY +=
 
 SOURCES += \
     main.cpp \

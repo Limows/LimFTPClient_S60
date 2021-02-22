@@ -26,7 +26,7 @@ NetHelper::NetHelper(QUrl URI, NetType Type)
         this->URI = URI;
         this->Http = new QHttp(this);
         this->Reader = new QBuffer(this);
-        this->Update = new QFile(ParamsHelper::DownloadPath + "/Update.sis");
+        this->Update = new QFile(ParamsHelper::DownloadPath + QDir::separator() + "Update.sis");
 
         connect(this->Http, SIGNAL(done(bool)), SLOT(HttpDone(bool)));
 
@@ -37,10 +37,8 @@ NetHelper::NetHelper(QUrl URI, NetType Type)
 void NetHelper::DownloadFile(QString DownloadDir, QString FileName)
 {
     QString FtpPath = this->URI.path();
-    QString FilePath = FtpPath + "/" + FileName;
-    QString DownloadFilePath = DownloadDir + "/" + FileName;
-
-    //connect(this->Ftp, SIGNAL(listInfo(QUrlInfo)), this, SLOT(AddToList(QUrlInfo)));
+    QString FilePath = FtpPath + QDir::separator() + FileName;
+    QString DownloadFilePath = DownloadDir + QDir::separator() + FileName;
 
     this->Downloaded = new QFile(DownloadFilePath);
     this->Downloaded->open(QFile::ReadWrite);

@@ -36,6 +36,7 @@ ParamsDialog::ParamsDialog(QWidget *parent) :
     ui->RmPackageBox->setChecked(ParamsHelper::IsRmPackage);
     ui->DownloadPathBox->setText(ParamsHelper::DownloadPath);
     ui->TempSizeBox->setText(QString::number(ParamsHelper::BytesToMegs(ParamsHelper::TempSize)));
+    ui->UsedTempSizeLabel->setText(tr("Занято сейчас: ") + QString::number(ParamsHelper::BytesToMegs(IOHelper::GetDirectorySize(ParamsHelper::TempPath))) + tr(" МБ"));
 }
 
 ParamsDialog::~ParamsDialog()

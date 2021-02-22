@@ -2,6 +2,7 @@
 #define PARAMSDIALOG_H
 
 #include "paramshelper.h"
+#include "iohelper.h"
 
 #include <QWidget>
 #include <QDesktopWidget>

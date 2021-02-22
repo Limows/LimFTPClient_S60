@@ -10,6 +10,7 @@
 #include <QBuffer>
 #include <QEventLoop>
 #include <QFile>
+#include <QDir>
 
 class NetHelper : public QObject
 {

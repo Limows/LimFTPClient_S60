@@ -16,6 +16,7 @@ public:
     static QString DownloadPath;
     static QString InstallPath;
     static QString ConfigPath;
+    static QString TempPath;
     static QSysInfo::S60Version OSVersion;
     static QList<QString> AppsList;
     static bool IsAutoInstall;

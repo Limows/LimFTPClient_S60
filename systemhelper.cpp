@@ -14,3 +14,8 @@ void SystemHelper::AppUninstall(QString AppName)
 {
 
 }
+
+uint SystemHelper::GetStorageSpace(QString Path)
+{
+
+}

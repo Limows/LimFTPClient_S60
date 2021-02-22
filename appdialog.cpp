@@ -20,7 +20,7 @@ AppDialog::AppDialog(QString CurrentAppName, QWidget *parent) :
 
     this->AppName = CurrentAppName.replace(' ', '_');
 
-    ParamsHelper::AppURI = QUrl(ParamsHelper::SystemURI.toString() + "/" + this->AppName);
+    ParamsHelper::AppURI = QUrl(ParamsHelper::SystemURI.toString() + QDir::separator() + this->AppName);
 }
 
 AppDialog::~AppDialog()
@@ -63,7 +63,7 @@ void AppDialog::on_Downloading_Complete(bool IsError)
 
         connect(ZipHelper, SIGNAL(unzip_done(bool, QString)), this, SLOT(on_Extracting_Complete(bool, QString)));
 
-        ZipHelper->ExtractToDirectory(ParamsHelper::DownloadPath + "/" + this->AppName + ".zip", ParamsHelper::DownloadPath + "/" + this->AppName);
+        ZipHelper->ExtractToDirectory(ParamsHelper::DownloadPath + QDir::separator() + this->AppName + ".zip", ParamsHelper::DownloadPath + QDir::separator() + this->AppName);
     }
     else
     {

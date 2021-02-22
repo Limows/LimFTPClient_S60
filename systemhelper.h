@@ -22,6 +22,8 @@ public:
 
     void AppUninstall(QString AppName);
 
+    static uint GetStorageSpace(QString Path);
+
 signals:
     void done(bool IsError);
 };

@@ -14,7 +14,9 @@ QSysInfo::S60Version ParamsHelper::OSVersion = QSysInfo::S60Version();
 bool ParamsHelper::IsAutoInstall = false;
 bool ParamsHelper::IsOverwrite = false;
 bool ParamsHelper::IsRmPackage = false;
-QString ParamsHelper::DownloadPath = "";
+QString ParamsHelper::DownloadPath = QString();
+QString ParamsHelper::TempPath = QString();
+QString ParamsHelper::ConfigPath = QString();
 QString ParamsHelper::InstallPath = "C:/";
 ulong ParamsHelper::TempSize = 0;
 

@@ -21,7 +21,7 @@ void IOHelper::ExtractAsync()
     {
         QuaZipFile CompressedFile(&UnZip);
         QString FileName = CompressedFile.getActualFileName();
-        QFile *ExtractedFile = new QFile(ExtractedFilePath + "/" + FileName);
+        QFile *ExtractedFile = new QFile(ExtractedFilePath + QDir::separator() + FileName);
 
         CompressedFile.open(QIODevice::ReadOnly);
         ExtractedFile->open(QFile::ReadWrite);
@@ -52,7 +52,12 @@ void IOHelper::ExtractToDirectory(QString CompressedFilePath, QString ExtractedF
 
 void IOHelper::SaveParameters()
 {
-    QFile *ConfigFile = new QFile(GetConfigPath("/") + "AppManager.conf");
+    if (ParamsHelper::ConfigPath.isNull() || ParamsHelper::ConfigPath.isEmpty())
+    {
+        ParamsHelper::ConfigPath = GetConfigPath("/");
+    }
+
+    QFile *ConfigFile = new QFile(ParamsHelper::ConfigPath + "AppManager.conf");
     ConfigFile->open(QFile::WriteOnly);
 
     QDataStream Config(ConfigFile);
@@ -69,7 +74,14 @@ void IOHelper::SaveParameters()
 
 void IOHelper::LoadParameters()
 {
-    QFile *ConfigFile = new QFile(GetConfigPath("/") + "AppManager.conf");
+    ParamsHelper::TempPath = QDir::currentPath() + QDir::separator() + "Temp";
+
+    if (ParamsHelper::ConfigPath.isNull() || ParamsHelper::ConfigPath.isEmpty())
+    {
+        ParamsHelper::ConfigPath = GetConfigPath("/");
+    }
+
+    QFile *ConfigFile = new QFile(ParamsHelper::ConfigPath + "AppManager.conf");
     ConfigFile->open(QFile::ReadOnly);
 
     QDataStream Config(ConfigFile);
@@ -86,7 +98,12 @@ void IOHelper::LoadParameters()
 
 void IOHelper::RemoveParameters()
 {
-    QFile *ConfigFile = new QFile(GetConfigPath("/") + "AppManager.conf");
+    if (ParamsHelper::ConfigPath.isNull() || ParamsHelper::ConfigPath.isEmpty())
+    {
+        ParamsHelper::ConfigPath = GetConfigPath("/");
+    }
+
+    QFile *ConfigFile = new QFile(ParamsHelper::ConfigPath + "AppManager.conf");
 
     ConfigFile->remove();
 }
@@ -101,14 +118,47 @@ QString IOHelper::GetConfigPath(QString Path)
     {
         if (dir == ".config")
         {
-            return Path + ".config/";
+            return Path + dir + QDir::separator();
         }
 
         if (dir == "Data" || dir == "data")
         {
-            return GetConfigPath("/" + dir + "/");
+            return GetConfigPath(QDir::separator() + dir + QDir::separator());
         }
     }
 
     return "/";
+}
+
+ulong IOHelper::GetDirectorySize(QString Path)
+{
+    qint64 Size = 0;
+    QDir Directory = QDir(Path);
+
+    if (Directory.exists())
+    {
+        QDir::Filters FilesFilter = QDir::Files|QDir::System|QDir::Hidden;
+        QDir::Filters DirsFilter = QDir::Dirs|QDir::NoDotAndDotDot|QDir::System|QDir::Hidden;
+
+        QList<QString> Files = Directory.entryList(FilesFilter);
+
+        foreach(QString file, Files)
+        {
+            QFileInfo FileInfo(Directory, file);
+            Size += FileInfo.size();
+        }
+
+        QList<QString> Directories = Directory.entryList(DirsFilter);
+
+        foreach(QString dir, Directories)
+        {
+            Size += GetDirectorySize(Path + QDir::separator() + dir);
+        }
+
+        return (uint)Size;
+    }
+    else
+    {
+        return 0;
+    }
 }
