@@ -1,6 +1,9 @@
 #ifndef SYSTEMHELPER_H
 #define SYSTEMHELPER_H
 
+#include "f32file.h"
+#include "e32const.h"
+
 #include <QString>
 #include <QList>
 #include <QObject>

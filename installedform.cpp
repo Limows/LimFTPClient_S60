@@ -32,6 +32,8 @@ InstalledForm::InstalledForm(QWidget *parent) :
     ActionsList.append(LeftOption);
 
     this->addActions(ActionsList);
+
+    ui->MemLabel->setText(tr("Доступно памяти: ") + QString::number(SystemHelper::GetStorageSpace(ParamsHelper::InstallPath)) + tr(" МБ"));
 }
 
 InstalledForm::~InstalledForm()

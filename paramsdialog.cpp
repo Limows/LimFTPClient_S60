@@ -71,13 +71,62 @@ QString ParamsDialog::OpenDirDialog()
     else return "";
 }
 
+QString ParamsDialog::CheckDirectory(QString Path)
+{
+    QDir Directory = QDir(Path);
+
+    if(Directory.exists())
+    {
+        return Path;
+    }
+    else
+    {
+        QMessageBox::StandardButton Result = QMessageBox::warning(this, tr("Предупреждение"), tr("Такая директория не существует.\n\nСоздать?"), QMessageBox::Yes|QMessageBox::No);
+
+        if (Result == QMessageBox::Yes)
+        {
+            if(Directory.mkpath(Path))
+            {
+                return Path;
+            }
+            else
+            {
+                QMessageBox::critical(this, tr("Ошибка"), tr("Не удалось создать директорию"), QMessageBox::Ok);
+                return "";
+            }
+        }
+        else return "";
+    }
+}
+
 void ParamsDialog::on_SaveButton_clicked()
 {
-    ParamsHelper::DownloadPath = ui->DownloadPathBox->text();
+    ParamsHelper::DownloadPath = CheckDirectory(ui->DownloadPathBox->text());
     ParamsHelper::IsAutoInstall = ui->AutoInstallBox->isChecked();
     ParamsHelper::IsOverwrite = ui->OverwriteDirsBox->isChecked();
     ParamsHelper::IsRmPackage = ui->RmPackageBox->isChecked();
-    ParamsHelper::TempSize = ParamsHelper::MegsToBytes(ui->TempSizeBox->text().toDouble());
+
+    if (ParamsHelper::InstallPath.isEmpty() || ParamsHelper::InstallPath.isNull())
+    {
+        QMessageBox::warning(this, tr("Предупреждение"), tr("Выберите место для установки"), QMessageBox::Ok);
+        return;
+    }
+
+    if (ParamsHelper::DownloadPath.isEmpty() || ParamsHelper::DownloadPath.isNull())
+    {
+        QMessageBox::warning(this, tr("Предупреждение"), tr("Путь не может быть пустым"), QMessageBox::Ok);
+        return;
+    }
+
+    if (ui->TempSizeBox->text().isEmpty() || ui->TempSizeBox->text().isNull() || ui->TempSizeBox->text().toDouble() == 0)
+    {
+        QMessageBox::warning(this, tr("Предупреждение"), tr("Не задан размер хранилища"), QMessageBox::Ok);
+        return;
+    }
+    else
+    {
+        ParamsHelper::TempSize = ParamsHelper::MegsToBytes(ui->TempSizeBox->text().toDouble());
+    }
 
     this->close();
     emit closed();

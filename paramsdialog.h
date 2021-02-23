@@ -11,6 +11,7 @@
 #include <QFileDialog>
 #include <QPalette>
 #include <QTextCodec>
+#include <QMessageBox>
 
 namespace Ui {
     class ParamsDialog;
@@ -39,6 +40,7 @@ private:
 
 private:
     QString OpenDirDialog();
+    QString CheckDirectory(QString Path);
 
 };
 

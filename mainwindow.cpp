@@ -138,9 +138,7 @@ void MainWindow::on_UpdateAction_triggered()
 
         Version = Version.replace("\n", "");
 
-        QMessageBox::StandardButton Result;
-
-        Result = QMessageBox::question(this, tr("Сообщение"), tr("Обновить?\n\nТекущая версия: ") + Version, QMessageBox::Yes|QMessageBox::No);
+        QMessageBox::StandardButton Result = QMessageBox::question(this, tr("Сообщение"), tr("Обновить?\n\nТекущая версия: ") + Version, QMessageBox::Yes|QMessageBox::No);
 
         if (Result == QMessageBox::Yes)
         {
