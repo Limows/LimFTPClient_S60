@@ -130,21 +130,39 @@ void MainWindow::on_Closing_Dialog()
 
 void MainWindow::on_UpdateAction_triggered()
 {
+    QString Version;
+    QString CurrentVersion = QString(APP_VERSION);
+    NetHelper *HttpNetHelper;
+
     try
     {
-        NetHelper *HttpNetHelper = new NetHelper(QUrl("http://limowski.xyz:80"), NetHelper::HTTP);
+        HttpNetHelper = new NetHelper(QUrl("http://limowski.xyz:80"), NetHelper::HTTP);
 
-        QString Version = HttpNetHelper->CheckUpdates("/downloads/LimFTPClient/Symbian_S60/LimFTPClientVersion.txt");
-
+        Version = HttpNetHelper->CheckUpdates("/downloads/LimFTPClient/Symbian_S60/LimFTPClientVersion.txt");
         Version = Version.replace("\n", "");
+    }
+    catch(int)
+    {
+        QMessageBox::critical(this, tr("Ошибка"), tr("Не удалось проверить наличие обновлений"), QMessageBox::Ok);
+        return;
+    }
 
-        QMessageBox::StandardButton Result = QMessageBox::question(this, tr("Сообщение"), tr("Обновить?\n\nТекущая версия: ") + Version, QMessageBox::Yes|QMessageBox::No);
+    if (CurrentVersion != Version)
+    {
+        QMessageBox::StandardButton Result = QMessageBox::question(this, tr("Сообщение"), tr("Обновить?\n\nВерсия: ") + Version, QMessageBox::Yes|QMessageBox::No);
 
         if (Result == QMessageBox::Yes)
         {
             if (!ParamsHelper::DownloadPath.isEmpty() && !ParamsHelper::DownloadPath.isNull())
             {
-                HttpNetHelper->GetUpdates("/downloads/LimFTPClient/Symbian_S60/LimFTPClient.sis");
+                try
+                {
+                    HttpNetHelper->GetUpdates("/downloads/LimFTPClient/Symbian_S60/LimFTPClient.sis");
+                }
+                catch(int)
+                {
+                    QMessageBox::critical(this, tr("Ошибка"), tr("Не удалось загрузить обновление"), QMessageBox::Ok);
+                }
             }
             else
             {
@@ -152,9 +170,9 @@ void MainWindow::on_UpdateAction_triggered()
             }
         }
     }
-    catch(int)
+    else
     {
-        QMessageBox::critical(this, tr("Ошибка"), tr("Не удалось обновить"), QMessageBox::Ok);
+        QMessageBox::information(this, tr("Сообщение"), tr("Последняя версия"), QMessageBox::Ok);
     }
 }
 
