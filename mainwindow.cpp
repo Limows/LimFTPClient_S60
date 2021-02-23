@@ -211,32 +211,32 @@ void MainWindow::on_Listing_Complete(bool IsError)
 
 QString MainWindow::SetRepository()
 {
-    ParamsHelper::OSVersion = QSysInfo::s60Version();
+    ParamsHelper::OSVersion = QSysInfo::symbianVersion();
 
     switch (ParamsHelper::OSVersion)
     {
-    case QSysInfo::SV_S60_3_1:
+    case QSysInfo::SV_9_2:
         return "/Symbian_S60v3";
         break;
 
-    case QSysInfo::SV_S60_3_2:
+    case QSysInfo::SV_9_3:
         return "/Symbian_S60v3";
         break;
 
-    case QSysInfo::SV_S60_5_0:
+    case QSysInfo::SV_SF_1:
         return "/Symbian_S60v5";
         break;
 
-    case QSysInfo::SV_S60_5_1:
-        return "/Symbian_S60v5";
+    case QSysInfo::SV_SF_3:
+        return "/Symbian^3";
         break;
 
-    case QSysInfo::SV_S60_5_2:
-        return "/Symbian_S60v5";
+    case QSysInfo::SV_SF_4:
+        return "/Symbian^3";
         break;
 
     default:
-        return "/Symbian^3";
+        return "/Symbian_S60v3";
     }
 }
 

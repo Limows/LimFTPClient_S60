@@ -17,7 +17,7 @@ public:
     static QString InstallPath;
     static QString ConfigPath;
     static QString TempPath;
-    static QSysInfo::S60Version OSVersion;
+    static QSysInfo::SymbianVersion OSVersion;
     static QList<QString> AppsList;
     static bool IsAutoInstall;
     static bool IsRmPackage;

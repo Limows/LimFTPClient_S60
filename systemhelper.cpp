@@ -17,16 +17,22 @@ void SystemHelper::AppUninstall(QString AppName)
 
 uint SystemHelper::GetStorageSpace(QString Path)
 {
-    RFs FileSystem;
-    TDriveInfo DriveInfo;
+    TChar DriveChar = Path.at(0).toAscii();
+    TInt Drive = 0;
+    RFs *FileSystem = new RFs();
+    TVolumeInfo VolumeInfo;
 
-    FileSystem.Connect();
+    FileSystem->CharToDrive(DriveChar, Drive);
 
-    FileSystem.Drive(DriveInfo);
+    FileSystem->Connect();
 
-    uint DriveAtributes = (uint)DriveInfo.iDriveAtt;
+    FileSystem->Volume(VolumeInfo, Drive);
 
-    DriveAtributes;
+    uint DriveFreeSpace = (uint)VolumeInfo.iFree;
+
+    CleanupStack::PopAndDestroy(FileSystem);
+
+    return DriveFreeSpace;
 }
 
 QList<QString> SystemHelper::GetAllStorages()
