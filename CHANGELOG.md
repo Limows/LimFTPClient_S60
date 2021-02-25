@@ -1,5 +1,24 @@
 # Changelog
 
+## [v0.4.3] - (25.02.21)
+
+### Added
+
+ - GetDirectorySize function
+ - GetAllStorages function
+ - GetStorageSpace function
+ - Screen rotation handling
+
+### Changed
+
+ - Parameters validation checks
+ - Update function validation checks
+ - Code refactored
+	
+### Fixed
+
+ - SetRepository logic
+
 ## [v0.4.2] - (21.02.21)
 
 ### Added

@@ -58,6 +58,8 @@ You need the following stuff to install this program:
  - Nokia E72
  - Nokia N8
  - Nokia E90 (Not working)
+ - Nokia C6
+ - Nokia N72
 
 ## Contributing
 
