@@ -34,7 +34,7 @@ symbian {
 
     VERSION = "0.4.3"
 
-    DEFINES += APP_VERSION=\"\\\"$${VERSION}-debug\\\"\"
+    DEFINES += APP_VERSION=\"\\\"$${VERSION}\\\"\"
 
     VENDOR = "LimSoft"
 

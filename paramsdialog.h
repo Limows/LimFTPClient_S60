@@ -20,10 +20,24 @@ namespace Ui {
 class ParamsDialog : public QWidget
 {
     Q_OBJECT
+
+private:
+    Ui::ParamsDialog *ui;
+
 public:
     explicit ParamsDialog(QWidget *parent = 0);
 
     virtual ~ParamsDialog();
+
+protected:
+    virtual void resizeEvent(QResizeEvent * event);
+
+private:
+    QString OpenDirDialog();
+
+    QString CheckDirectory(QString Path);
+
+    void InitLayout();
 
 signals:
     void closed();
@@ -34,14 +48,6 @@ private slots:
     void on_OpenDirButton_clicked();
 
     void on_SaveButton_clicked();
-
-private:
-    Ui::ParamsDialog *ui;
-
-private:
-    QString OpenDirDialog();
-    QString CheckDirectory(QString Path);
-
 };
 
 #endif // PARAMSDIALOG_H

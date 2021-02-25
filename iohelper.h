@@ -22,6 +22,10 @@ class IOHelper : public QObject
 {
     Q_OBJECT
 
+private:
+    QString Compressed;
+    QString Extracted;
+
 public:
     IOHelper();
 
@@ -38,20 +42,15 @@ public:
     static ulong GetDirectorySize(QString Path);
 
 private:
-    QString Compressed;
+    static QString GetConfigPath(QString Path);
 
-    QString Extracted;
-
-private slots:
-    void ExtractAsync();
+    void ExtractAsync(QString CompressedFilePath, QString ExtractedFilePath);
 
 signals:
     void unzip_done(bool IsError, QString ExtractedFilePath);
 
-private:
-    static QString GetConfigPath(QString Path);
-
-    void ExtractAsync(QString CompressedFilePath, QString ExtractedFilePath);
+private slots:
+    void ExtractAsync();
 };
 
 #endif // IOHELPER_H

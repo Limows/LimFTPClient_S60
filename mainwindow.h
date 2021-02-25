@@ -26,13 +26,19 @@ namespace Ui {
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+
 public:
-    enum ScreenOrientation {
+    enum ScreenOrientation
+    {
         ScreenOrientationLockPortrait,
         ScreenOrientationLockLandscape,
         ScreenOrientationAuto
     };
 
+private:
+    Ui::MainWindow *ui;
+
+public:
     explicit MainWindow(QWidget *parent = 0);
 
     virtual ~MainWindow();
@@ -41,6 +47,16 @@ public:
     void setOrientation(ScreenOrientation orientation);
 
     void showExpanded();
+
+protected:
+    virtual void resizeEvent(QResizeEvent * event);
+
+private:
+    void BeginConnect();
+
+    QString SetRepository();
+
+    void InitLayout();
 
 private slots:
     void on_ParamsAction_triggered();
@@ -60,14 +76,6 @@ private slots:
     void on_AppsListWidget_itemClicked(QListWidgetItem *item);
 
     void on_InstalledAction_triggered();
-
-private:
-    Ui::MainWindow *ui;
-
-private:
-    void BeginConnect();
-
-    QString SetRepository();
 };
 
 #endif // MAINWINDOW_H

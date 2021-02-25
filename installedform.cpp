@@ -7,17 +7,9 @@ InstalledForm::InstalledForm(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    InitLayout();
+
     QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
-
-    const QRect ScreenRect = QApplication::desktop()->screenGeometry(this);
-
-    int height = ScreenRect.height();
-    int width = ScreenRect.width();
-    QRect *FormRect = new QRect(0, 0, width, (int)(height*0.92));
-
-    this->setGeometry(*FormRect);
-    ui->ContentLayout->setGeometry(*FormRect);
-    ui->gridLayoutWidget->setGeometry(*FormRect);
 
     QAction *RightOption = new QAction("Exit", this);
     RightOption->setSoftKeyRole(QAction::NegativeSoftKey);
@@ -49,4 +41,22 @@ void InstalledForm::on_DeleteAction_triggered()
 void InstalledForm::on_PropAction_triggered()
 {
 
+}
+
+void InstalledForm::InitLayout()
+{
+    const QRect ScreenRect = QApplication::desktop()->screenGeometry(this);
+
+    int height = ScreenRect.height();
+    int width = ScreenRect.width();
+    QRect *FormRect = new QRect(0, 0, width, (int)(height*0.92));
+
+    this->setGeometry(*FormRect);
+    ui->ContentLayout->setGeometry(*FormRect);
+    ui->gridLayoutWidget->setGeometry(*FormRect);
+}
+
+void InstalledForm::resizeEvent(QResizeEvent *event)
+{
+    InitLayout();
 }

@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     MainWindow mainWindow;
-    //mainWindow.setOrientation(MainWindow::ScreenOrientationLockPortrait);
+
     Qt::WindowFlags flags;
     flags |= Qt::WindowSoftkeysVisibleHint;
     flags &= ~Qt::WindowSoftkeysRespondHint;

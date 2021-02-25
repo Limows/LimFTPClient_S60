@@ -7,15 +7,9 @@ AboutDialog::AboutDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    InitLayout();
+
     QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
-
-    const QRect ScreenRect = QApplication::desktop()->screenGeometry();
-
-    this->setGeometry(ScreenRect);
-    ui->ContentLayout->setGeometry(ScreenRect);
-    ui->layoutWidget->setGeometry(ScreenRect);
-
-    ui->TitleLabel->setAutoFillBackground(true);
 
     ui->labelProductName->setText("Limowski App Manager");
     ui->labelVersion->setText(tr("Версия: ") + QString(APP_VERSION));
@@ -33,4 +27,20 @@ void AboutDialog::on_OKButton_clicked()
 {
     this->close();
     emit closed();
+}
+
+void AboutDialog::InitLayout()
+{
+    const QRect ScreenRect = QApplication::desktop()->screenGeometry();
+
+    this->setGeometry(ScreenRect);
+    ui->ContentLayout->setGeometry(ScreenRect);
+    ui->layoutWidget->setGeometry(ScreenRect);
+
+    ui->TitleLabel->setAutoFillBackground(true);
+}
+
+void AboutDialog::resizeEvent(QResizeEvent *event)
+{
+    InitLayout();
 }

@@ -19,10 +19,23 @@ class AppDialog : public QWidget
 {
     Q_OBJECT
 
+private:
+    Ui::AppDialog *ui;
+    QString AppName;
+
 public:
     explicit AppDialog(QString AppName = "Application", QWidget *parent = 0);
 
     ~AppDialog();
+
+protected:
+    virtual void resizeEvent(QResizeEvent * event);
+
+private:
+    void InitLayout();
+
+signals:
+    void closed();
 
 private slots:
     void on_DownloadButton_clicked();
@@ -34,13 +47,6 @@ private slots:
     void on_Extracting_Complete(bool IsError, QString ExtractedFilePath);
 
     void on_Installing_Complete(bool IsError);
-
-signals:
-    void closed();
-
-private:
-    Ui::AppDialog *ui;
-    QString AppName;
 };
 
 #endif // APPDIALOG_H

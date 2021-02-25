@@ -7,29 +7,9 @@ ParamsDialog::ParamsDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    const QRect ScreenRect = QApplication::desktop()->screenGeometry();
+    InitLayout();
 
     QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
-
-    this->setGeometry(ScreenRect);
-    ui->ContentLayout->setGeometry(ScreenRect);
-    ui->gridLayoutWidget->setGeometry(ScreenRect);
-
-    ui->TitleLabel->setAutoFillBackground(true);
-    QColor BackColor = ui->TabWidget->palette().color(QPalette::Background);
-    QPalette palette = this->palette();
-    palette.setColor(this->backgroundRole(), BackColor);
-    this->setPalette(palette);
-
-    QRect TabWidgetRect = ui->TabWidget->geometry();
-    QRect *TabRect = new QRect(0, 0, TabWidgetRect.width() - 3, TabWidgetRect.height() - 20);
-
-    ui->DownloadTabLayout->setGeometry(*TabRect);
-    ui->gridLayoutWidget_2->setGeometry(*TabRect);
-    ui->InstallTabLayout->setGeometry(*TabRect);
-    ui->gridLayoutWidget_3->setGeometry(*TabRect);
-    ui->BufferTabLayout->setGeometry(*TabRect);
-    ui->gridLayoutWidget_4->setGeometry(*TabRect);
 
     ui->AutoInstallBox->setChecked(ParamsHelper::IsAutoInstall);
     ui->OverwriteDirsBox->setChecked(ParamsHelper::IsOverwrite);
@@ -130,4 +110,35 @@ void ParamsDialog::on_SaveButton_clicked()
 
     this->close();
     emit closed();
+}
+
+
+void ParamsDialog::InitLayout()
+{
+    const QRect ScreenRect = QApplication::desktop()->screenGeometry();
+
+    this->setGeometry(ScreenRect);
+    ui->ContentLayout->setGeometry(ScreenRect);
+    ui->gridLayoutWidget->setGeometry(ScreenRect);
+
+    ui->TitleLabel->setAutoFillBackground(true);
+    QColor BackColor = ui->TabWidget->palette().color(QPalette::Background);
+    QPalette palette = this->palette();
+    palette.setColor(this->backgroundRole(), BackColor);
+    this->setPalette(palette);
+
+    QRect TabWidgetRect = ui->TabWidget->geometry();
+    QRect *TabRect = new QRect(0, 0, TabWidgetRect.width() - 3, TabWidgetRect.height() - 20);
+
+    ui->DownloadTabLayout->setGeometry(*TabRect);
+    ui->gridLayoutWidget_2->setGeometry(*TabRect);
+    ui->InstallTabLayout->setGeometry(*TabRect);
+    ui->gridLayoutWidget_3->setGeometry(*TabRect);
+    ui->BufferTabLayout->setGeometry(*TabRect);
+    ui->gridLayoutWidget_4->setGeometry(*TabRect);
+}
+
+void ParamsDialog::resizeEvent(QResizeEvent *event)
+{
+    InitLayout();
 }

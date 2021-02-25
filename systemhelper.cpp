@@ -15,22 +15,26 @@ void SystemHelper::AppUninstall(QString AppName)
 
 }
 
-uint SystemHelper::GetStorageSpace(QString Path)
+ulong SystemHelper::GetStorageSpace(QString Path)
 {
     TChar DriveChar = Path.at(0).toAscii();
     TInt Drive = 0;
-    RFs *FileSystem = new RFs();
+    RFs FileSystem;
     TVolumeInfo VolumeInfo;
 
-    FileSystem->CharToDrive(DriveChar, Drive);
+    //User::LeaveIfError(FileSystem.Connect());
 
-    FileSystem->Connect();
+    //CleanupClosePushL(FileSystem);
 
-    FileSystem->Volume(VolumeInfo, Drive);
+    FileSystem.Connect();
 
-    uint DriveFreeSpace = (uint)VolumeInfo.iFree;
+    FileSystem.CharToDrive(DriveChar, Drive);
 
-    CleanupStack::PopAndDestroy(FileSystem);
+    FileSystem.Volume(VolumeInfo, Drive);
+
+    ulong DriveFreeSpace = (ulong)VolumeInfo.iFree;
+
+    //CleanupStack::PopAndDestroy(&FileSystem);
 
     return DriveFreeSpace;
 }

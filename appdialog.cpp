@@ -7,15 +7,10 @@ AppDialog::AppDialog(QString CurrentAppName, QWidget *parent) :
 {
     ui->setupUi(this);
 
+    InitLayout();
+
     QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
 
-    const QRect ScreenRect = QApplication::desktop()->screenGeometry();
-
-    this->setGeometry(ScreenRect);
-    ui->ContentLayout->setGeometry(ScreenRect);
-    ui->gridLayoutWidget->setGeometry(ScreenRect);
-
-    ui->TitleLabel->setAutoFillBackground(true);
     ui->TitleLabel->setText(CurrentAppName);
 
     this->AppName = CurrentAppName.replace(' ', '_');
@@ -115,4 +110,20 @@ void AppDialog::on_BackButton_clicked()
 {
     this->close();
     emit closed();
+}
+
+void AppDialog::InitLayout()
+{
+    const QRect ScreenRect = QApplication::desktop()->screenGeometry();
+
+    this->setGeometry(ScreenRect);
+    ui->ContentLayout->setGeometry(ScreenRect);
+    ui->gridLayoutWidget->setGeometry(ScreenRect);
+
+    ui->TitleLabel->setAutoFillBackground(true);
+}
+
+void AppDialog::resizeEvent(QResizeEvent *event)
+{
+    InitLayout();
 }

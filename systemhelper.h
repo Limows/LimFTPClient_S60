@@ -29,7 +29,7 @@ public:
 
     void AppUninstall(QString AppName);
 
-    static uint GetStorageSpace(QString Path);
+    static ulong GetStorageSpace(QString Path);
 
     static QList<QString> GetAllStorages();
 

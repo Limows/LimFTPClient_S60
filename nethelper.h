@@ -23,6 +23,14 @@ public:
         HTTP
     };
 
+private:
+    QFtp *Ftp;
+    QHttp *Http;
+    QUrl URI;
+    QBuffer *Reader;
+    QFile *Update;
+    QFile *Downloaded;
+
 public:
     NetHelper();
 
@@ -38,6 +46,9 @@ public:
 
     void GetUpdates(QString Source);
 
+signals:
+    void done(bool IsError);
+
 private slots:
     void AddToList(const QUrlInfo &UriInfo);
 
@@ -48,17 +59,6 @@ private slots:
     void FtpDone(bool IsError);
 
     void HttpDone(bool IsError);
-
-signals:
-    void done(bool IsError);
-
-private:
-    QFtp *Ftp;
-    QHttp *Http;
-    QUrl URI;
-    QBuffer *Reader;
-    QFile *Update;
-    QFile *Downloaded;
 };
 
 #endif // NETHELPER_H
