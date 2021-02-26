@@ -19,6 +19,7 @@ ParamsDialog::ParamsDialog(QWidget *parent) :
     ui->UsedTempSizeLabel->setText(tr("Занято сейчас: ") + QString::number(ParamsHelper::BytesToMegs(IOHelper::GetDirectorySize(ParamsHelper::TempPath))) + tr(" МБ"));
 
     QList<QString> DrivesNames = SystemHelper::GetAllStorages();
+    ParamsHelper::InstallPath = DrivesNames[0];
 }
 
 ParamsDialog::~ParamsDialog()

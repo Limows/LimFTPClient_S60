@@ -1,5 +1,15 @@
 # Changelog
 
+## [v0.4.4] - (26.02.21)
+
+### Added
+
+### Changed
+	
+### Fixed
+
+ - Critical fix of install path
+
 ## [v0.4.3] - (25.02.21)
 
 ### Added
