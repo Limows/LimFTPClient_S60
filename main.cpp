@@ -9,12 +9,13 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-
     MainWindow mainWindow;
 
     Qt::WindowFlags flags;
     flags |= Qt::WindowSoftkeysVisibleHint;
     flags &= ~Qt::WindowSoftkeysRespondHint;
+
+    SystemHelper::GetSystemInfo();
 
     mainWindow.setWindowFlags(flags);
     mainWindow.setWindowIcon(QIcon(":/icons/logo.ico"));

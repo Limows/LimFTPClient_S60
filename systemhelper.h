@@ -3,6 +3,7 @@
 
 #include "f32file.h"
 #include "e32const.h"
+#include "paramshelper.h"
 
 #include <QString>
 #include <QList>
@@ -11,6 +12,11 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QFileInfoList>
+#include <QTextStream>
+#include <QApplication>
+#include <QWidget>
+#include <QDesktopWidget>
+#include <QRect>
 //#include <SWInstApi.h>
 //#include <SWInstDefs.h>
 
@@ -32,6 +38,10 @@ public:
     static ulong GetStorageSpace(QString Path);
 
     static QList<QString> GetAllStorages();
+
+    static void GetSystemInfo();
+
+    static QRect* GetScreenRect();
 
 signals:
     void done(bool IsError);

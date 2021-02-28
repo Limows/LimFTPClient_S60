@@ -30,7 +30,9 @@ protected:
     virtual void resizeEvent(QResizeEvent * event);
 
 private:
-    void InitLayout();
+    void InitLayout(QRect* FormRect);
+
+    void InitComponents();
 
 signals:
     void closed();

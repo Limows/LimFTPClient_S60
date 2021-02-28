@@ -5,9 +5,7 @@ InstalledForm::InstalledForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::InstalledForm)
 {
-    ui->setupUi(this);
-
-    InitLayout();
+    InitComponents();
 
     QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
 
@@ -43,14 +41,8 @@ void InstalledForm::on_PropAction_triggered()
 
 }
 
-void InstalledForm::InitLayout()
+void InstalledForm::InitLayout(QRect *FormRect)
 {
-    const QRect ScreenRect = QApplication::desktop()->screenGeometry(this);
-
-    int height = ScreenRect.height();
-    int width = ScreenRect.width();
-    QRect *FormRect = new QRect(0, 0, width, (int)(height*0.92));
-
     this->setGeometry(*FormRect);
     ui->ContentLayout->setGeometry(*FormRect);
     ui->gridLayoutWidget->setGeometry(*FormRect);
@@ -58,5 +50,16 @@ void InstalledForm::InitLayout()
 
 void InstalledForm::resizeEvent(QResizeEvent *event)
 {
-    InitLayout();
+    QRect *FormRect = SystemHelper::GetScreenRect();
+
+    InitLayout(FormRect);
+}
+
+void InstalledForm::InitComponents()
+{
+    QRect *FormRect = SystemHelper::GetScreenRect();
+
+    ui->setupUi(this);
+
+    InitLayout(FormRect);
 }

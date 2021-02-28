@@ -56,7 +56,9 @@ private:
 
     QString SetRepository();
 
-    void InitLayout();
+    void InitLayout(QRect* FormRect);
+
+    void InitComponents();
 
 private slots:
     void on_ParamsAction_triggered();

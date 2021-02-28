@@ -12,10 +12,11 @@ AppDialog::AppDialog(QString CurrentAppName, QWidget *parent) :
     QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
 
     ui->TitleLabel->setText(CurrentAppName);
+    ui->NameLabel->setText(CurrentAppName);
 
     this->AppName = CurrentAppName.replace(' ', '_');
 
-    ParamsHelper::AppURI = QUrl(ParamsHelper::SystemURI.toString() + QDir::separator() + this->AppName);
+    ParamsHelper::AppURI = QUrl(ParamsHelper::SystemURI.toString() + "/" + this->AppName);
 }
 
 AppDialog::~AppDialog()
@@ -75,8 +76,8 @@ void AppDialog::on_Extracting_Complete(bool IsError, QString ExtractedFilePath)
         ui->StatusLabel->setText(tr("Успешно распаковано"));
         this->setCursor(Qt::ArrowCursor);
 
-        this->setCursor(Qt::WaitCursor);
-        ui->StatusLabel->setText(tr("Идёт установка"));
+        //this->setCursor(Qt::WaitCursor);
+        //ui->StatusLabel->setText(tr("Идёт установка"));
 
         SystemHelper *InstallHelper = new SystemHelper();
 

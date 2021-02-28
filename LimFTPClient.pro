@@ -32,7 +32,7 @@ symbian {
         network \
         gui
 
-    VERSION = "0.4.4"
+    VERSION = "0.4.5"
 
     DEFINES += APP_VERSION=\"\\\"$${VERSION}\\\"\"
 

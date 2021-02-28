@@ -4,9 +4,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
-
-    InitLayout();
+    InitComponents();
 
     QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
 
@@ -214,7 +212,7 @@ QString MainWindow::SetRepository()
         return "/Symbian_S60v3";
         break;
 
-    case QSysInfo::SV_SF_1:
+    case QSysInfo::SV_9_4:
         return "/Symbian_S60v5";
         break;
 
@@ -227,7 +225,7 @@ QString MainWindow::SetRepository()
         break;
 
     default:
-        return "/Symbian_S60v3";
+        return "/Symbian^3";
     }
 }
 
@@ -261,18 +259,23 @@ void MainWindow::on_InstalledAction_triggered()
 
 void MainWindow::resizeEvent(QResizeEvent *event)
 {
-    InitLayout();
+    QRect *FormRect = SystemHelper::GetScreenRect();
+
+    InitLayout(FormRect);
 }
 
-void MainWindow::InitLayout()
+void MainWindow::InitLayout(QRect *FormRect)
 {
-    const QRect ScreenRect = QApplication::desktop()->screenGeometry(this);
-
-    int height = ScreenRect.height();
-    int width = ScreenRect.width();
-    QRect *FormRect = new QRect(0, 0, width, (int)(height*0.92));
-
     this->setGeometry(*FormRect);
     ui->GridLayout->setGeometry(*FormRect);
     ui->gridLayoutWidget->setGeometry(*FormRect);
+}
+
+void MainWindow::InitComponents()
+{
+    QRect *FormRect = SystemHelper::GetScreenRect();
+
+    ui->setupUi(this);
+
+    InitLayout(FormRect);
 }
