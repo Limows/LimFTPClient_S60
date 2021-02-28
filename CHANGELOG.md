@@ -1,5 +1,21 @@
 # Changelog
 
+## [v0.4.4] - (28.02.21)
+
+### Added
+
+ - GetSysInfo function
+
+### Changed
+
+ - SetRepository function
+	
+### Fixed
+
+ - Some dumb errors
+ - Layout
+ - Rotation handling (mostly)
+
 ## [v0.4.4] - (26.02.21)
 
 ### Added
