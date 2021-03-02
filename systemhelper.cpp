@@ -44,18 +44,28 @@ void SystemHelper::AppInstall(QString AppPath, QString InstallPath, QString AppN
         Options.iUpgradeData = SwiUI::EPolicyNotAllowed;
     }
 
-    Options.iOCSP = SwiUI::EPolicyNotAllowed;
+    Options.iOCSP = SwiUI::EPolicyAllowed;
+    Options.iIgnoreOCSPWarnings = SwiUI::EPolicyAllowed;
+    Options.iOptionalItems = SwiUI::EPolicyAllowed;
     Options.iDrive = InstallPath.at(0).toAscii();
     Options.iUntrusted = SwiUI::EPolicyAllowed;
     Options.iCapabilities = SwiUI::EPolicyAllowed;
-    Options.iPackageInfo = SwiUI::EPolicyNotAllowed;
+    Options.iPackageInfo = SwiUI::EPolicyAllowed;
     Options.iKillApp = SwiUI::EPolicyAllowed;
+    Options.iDownload = SwiUI::EPolicyAllowed;
 
     OptionsPckg = Options;
 
     TPtrC16 BufFileName(reinterpret_cast<const TUint16*>(FileName.utf16()));
     Installer.Connect();
-    Error = Installer.SilentInstall(BufFileName, OptionsPckg);
+    if (ParamsHelper::IsAutoInstall)
+    {
+        Error = Installer.SilentInstall(BufFileName, OptionsPckg);
+    }
+    else
+    {
+        Error = Installer.Install(BufFileName, OptionsPckg);
+    }
     Installer.Close();
 
     if (Error == 0)

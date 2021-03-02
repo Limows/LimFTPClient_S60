@@ -55,14 +55,14 @@ void AppDialog::on_Downloading_Complete(bool IsError)
 
         QMessageBox::StandardButton Result;
 
-        if (!ParamsHelper::IsAutoInstall)
-        {
-            Result = QMessageBox::question(this, tr("Сообщение"), tr("Установить?"), QMessageBox::Yes|QMessageBox::No);
-        }
-        else
-        {
+        //if (!ParamsHelper::IsAutoInstall)
+        //{
+        //    Result = QMessageBox::question(this, tr("Сообщение"), tr("Установить?"), QMessageBox::Yes|QMessageBox::No);
+        //}
+        //else
+        //{
             Result = QMessageBox::Yes;
-        }
+        //}
 
         if (Result == QMessageBox::Yes)
         {
