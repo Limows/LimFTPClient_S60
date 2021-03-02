@@ -9,6 +9,7 @@
 #include <QAction>
 #include <QTextCodec>
 #include <QDesktopWidget>
+#include <QMap>
 
 namespace Ui {
     class InstalledForm;
@@ -20,6 +21,9 @@ class InstalledForm : public QWidget
 
 private:
     Ui::InstalledForm *ui;
+
+public:
+    QMap<QString, uint> InstalledMap;
 
 public:
     explicit InstalledForm(QWidget *parent = 0);

@@ -99,7 +99,7 @@ void AppDialog::on_Extracting_Complete(bool IsError, QString ExtractedFilePath)
 
         connect(InstallHelper, SIGNAL(done(bool)), this, SLOT(on_Installing_Complete(bool)));
 
-        InstallHelper->AppInstall(ExtractedFilePath, ParamsHelper::InstallPath, this->AppName, ParamsHelper::IsOverwrite);
+        InstallHelper->AppInstall(ExtractedFilePath, ParamsHelper::InstallPath, ParamsHelper::IsOverwrite);
     }
     else
     {

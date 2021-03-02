@@ -5,7 +5,7 @@ SystemHelper::SystemHelper()
 
 }
 
-void SystemHelper::AppInstall(QString AppPath, QString InstallPath, QString AppName, bool Overwrite)
+void SystemHelper::AppInstall(QString AppPath, QString InstallPath, bool Overwrite)
 {
     QStringList NameFilters;
     QDir AppDir(AppPath);
@@ -18,6 +18,7 @@ void SystemHelper::AppInstall(QString AppPath, QString InstallPath, QString AppN
 
     NameFilters << "*.sis";
     NameFilters << "*.sisx";
+    NameFilters << "*.jar";
 
     SisFilesList = AppDir.entryInfoList(NameFilters,QDir::Files);
 
@@ -78,20 +79,19 @@ void SystemHelper::AppInstall(QString AppPath, QString InstallPath, QString AppN
     }
 }
 
-void SystemHelper::AppUninstall(QString AppName)
+void SystemHelper::AppUninstall(uint AppUid)
 {
     SwiUI::RSWInstLauncher Uninstaller;
     SwiUI::TUninstallOptions Options;
-    SwiUI::TUninstallOptions OptionsPckg;
+    SwiUI::TUninstallOptionsPckg OptionsPckg;
     int Error = 0;
-    uint AppUid = 0;
 
     Options.iKillApp = SwiUI::EPolicyAllowed;
 
     OptionsPckg = Options;
 
     Uninstaller.Connect();
-    //Error = Uninstaller.SilentUninstall(TUid::Uid(AppUid), OptionsPckg, SwiUI::KSisMimeType);
+    Error = Uninstaller.SilentUninstall(TUid::Uid(AppUid), OptionsPckg, SwiUI::KSisMimeType());
     Uninstaller.Close();
 
     if (Error == 0)
@@ -216,4 +216,36 @@ QRect* SystemHelper::GetScreenRect()
     {
         return new QRect(0, 0, AvailableRect.width(), AvailableRect.height());
     }
+}
+
+QMap<QString, uint> SystemHelper::GetInstalledApps()
+{
+    RApaLsSession AppListSession;
+    QMap<QString, uint> InstalledMap;
+    TApaAppInfo AppInfo;
+    int Error = 0;
+
+    Error = AppListSession.Connect();
+
+    if (Error == 0)
+    {
+        AppListSession.GetAllApps();
+
+        while (AppListSession.GetNextApp(AppInfo) == 0)
+        {
+            TApaAppCapabilityBuf CapabilityBuf;
+
+            AppListSession.GetAppCapability(CapabilityBuf, AppInfo.iUid);
+
+            TApaAppCapability Capability = CapabilityBuf();
+
+            if (AppInfo.iCaption.Length() > 0 && !Capability.iAppIsHidden)
+            {
+                QString AppName = QString::fromUtf16(AppInfo.iCaption.Ptr(), AppInfo.iCaption.Length());
+
+                InstalledMap.insert(AppName, (uint)AppInfo.iUid.iUid);
+            }
+        }
+    }
+    return InstalledMap;
 }

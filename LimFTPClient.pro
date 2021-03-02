@@ -32,9 +32,9 @@ symbian {
         network \
         gui
 
-    VERSION = "0.5.0"
+    VERSION = "0.5.1"
 
-    DEFINES += APP_VERSION=\"\\\"$${VERSION}\\\"\"
+    DEFINES += APP_VERSION=\"\\\"$${VERSION}-debug\\\"\"
 
     VENDOR = "LimSoft"
 

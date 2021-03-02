@@ -24,6 +24,19 @@ InstalledForm::InstalledForm(QWidget *parent) :
     this->addActions(ActionsList);
 
     ui->MemLabel->setText(tr("Доступно памяти: ") + QString::number(ParamsHelper::BytesToMegs(SystemHelper::GetStorageSpace(ParamsHelper::InstallPath))) + tr(" МБ"));
+
+    this->InstalledMap = SystemHelper::GetInstalledApps();
+
+    if (!this->InstalledMap.isEmpty())
+    {
+        int i = 0;
+
+        foreach (QString app_name, InstalledMap.keys())
+        {
+            ui->InstalledListWidget->insertItem(i, app_name);
+            i++;
+        }
+    }
 }
 
 InstalledForm::~InstalledForm()
