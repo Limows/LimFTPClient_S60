@@ -42,6 +42,7 @@ You need the following stuff to install this program:
  - Listing available for device applications
  - Downloading app package
  - Unpacking package
+ - Installing package
  
 ## OS Support
 
