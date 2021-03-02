@@ -135,7 +135,7 @@ void ParamsDialog::InitLayout()
     ui->gridLayoutWidget_2->setGeometry(*TabRect);
     ui->InstallTabLayout->setGeometry(*TabRect);
     ui->gridLayoutWidget_3->setGeometry(*TabRect);
-    ui->BufferTabLayout->setGeometry(*TabRect);
+    ui->SystemTabLayout->setGeometry(*TabRect);
     ui->gridLayoutWidget_4->setGeometry(*TabRect);
 }
 

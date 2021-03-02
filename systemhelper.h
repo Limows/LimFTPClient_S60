@@ -17,8 +17,9 @@
 #include <QWidget>
 #include <QDesktopWidget>
 #include <QRect>
-//#include <SWInstApi.h>
-//#include <SWInstDefs.h>
+#include <QDesktopServices>
+#include <SWInstApi.h>
+#include <SWInstDefs.h>
 
 class SystemHelper : public QObject
 {

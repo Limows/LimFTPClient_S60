@@ -13,6 +13,7 @@ AppDialog::AppDialog(QString CurrentAppName, QWidget *parent) :
 
     ui->TitleLabel->setText(CurrentAppName);
     ui->NameLabel->setText(CurrentAppName);
+    ui->StatusLabel->setText(QString());
 
     this->AppName = CurrentAppName.replace(' ', '_');
 
@@ -52,14 +53,29 @@ void AppDialog::on_Downloading_Complete(bool IsError)
         ui->StatusLabel->setText(tr("Успешно загружено"));
         this->setCursor(Qt::ArrowCursor);
 
-        this->setCursor(Qt::WaitCursor);
-        ui->StatusLabel->setText(tr("Идёт распаковка"));
+        QMessageBox::StandardButton Result;
 
-        IOHelper *ZipHelper = new IOHelper();
+        if (!ParamsHelper::IsAutoInstall)
+        {
+            Result = QMessageBox::question(this, tr("Сообщение"), tr("Установить?"), QMessageBox::Yes|QMessageBox::No);
+        }
+        else
+        {
+            Result = QMessageBox::Yes;
+        }
 
-        connect(ZipHelper, SIGNAL(unzip_done(bool, QString)), this, SLOT(on_Extracting_Complete(bool, QString)));
+        if (Result == QMessageBox::Yes)
+        {
 
-        ZipHelper->ExtractToDirectory(ParamsHelper::DownloadPath + QDir::separator() + this->AppName + ".zip", ParamsHelper::DownloadPath + QDir::separator() + this->AppName);
+            this->setCursor(Qt::WaitCursor);
+            ui->StatusLabel->setText(tr("Идёт распаковка"));
+
+            IOHelper *ZipHelper = new IOHelper();
+
+            connect(ZipHelper, SIGNAL(unzip_done(bool, QString)), this, SLOT(on_Extracting_Complete(bool, QString)));
+
+            ZipHelper->ExtractToDirectory(ParamsHelper::DownloadPath + QDir::separator() + this->AppName + ".zip", ParamsHelper::DownloadPath + QDir::separator() + this->AppName);
+        }
     }
     else
     {
@@ -76,8 +92,8 @@ void AppDialog::on_Extracting_Complete(bool IsError, QString ExtractedFilePath)
         ui->StatusLabel->setText(tr("Успешно распаковано"));
         this->setCursor(Qt::ArrowCursor);
 
-        //this->setCursor(Qt::WaitCursor);
-        //ui->StatusLabel->setText(tr("Идёт установка"));
+        this->setCursor(Qt::WaitCursor);
+        ui->StatusLabel->setText(tr("Идёт установка"));
 
         SystemHelper *InstallHelper = new SystemHelper();
 

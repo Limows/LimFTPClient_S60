@@ -7,21 +7,19 @@ IOHelper::IOHelper()
 
 void IOHelper::ExtractAsync()
 {
-    QString CompressedFilePath = this->Compressed;
-    QString ExtractedFilePath = this->Extracted;
-    QuaZip UnZip(CompressedFilePath);          
+    QuaZip UnZip(this->Compressed);
     QDir ExtractedDir;
     bool IsError = false;
 
     UnZip.open(QuaZip::mdUnzip);
 
-    ExtractedDir.mkpath(ExtractedFilePath);
+    ExtractedDir.mkpath(this->Extracted);
 
     for(bool FileExist = UnZip.goToFirstFile(); FileExist; FileExist=UnZip.goToNextFile())
     {
         QuaZipFile CompressedFile(&UnZip);
         QString FileName = CompressedFile.getActualFileName();
-        QFile *ExtractedFile = new QFile(ExtractedFilePath + QDir::separator() + FileName);
+        QFile *ExtractedFile = new QFile(this->Extracted + QDir::separator() + FileName);
 
         CompressedFile.open(QIODevice::ReadOnly);
         ExtractedFile->open(QFile::ReadWrite);
@@ -34,7 +32,7 @@ void IOHelper::ExtractAsync()
 
     UnZip.close();
 
-    emit unzip_done(IsError, ExtractedFilePath);
+    emit unzip_done(IsError, this->Extracted);
 }
 
 void IOHelper::ExtractToDirectory(QString CompressedFilePath, QString ExtractedFilePath)

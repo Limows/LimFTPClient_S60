@@ -32,7 +32,7 @@ symbian {
         network \
         gui
 
-    VERSION = "0.4.5"
+    VERSION = "0.5.0"
 
     DEFINES += APP_VERSION=\"\\\"$${VERSION}\\\"\"
 
@@ -54,7 +54,7 @@ symbian {
     LIBS += \
         -lezip \
         -lquazip \
-    #    -lswinstcli \
+        -lswinstcli \
         -lcommdb \
         -lapparc \
         -lefsrv \
