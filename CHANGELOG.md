@@ -1,5 +1,19 @@
 # Changelog
 
+## [v0.5.0] - (02.03.21)
+
+### Added
+
+ - Install function
+
+### Changed
+
+ - Slightly UI changes
+	
+### Fixed
+
+ - Dumb errors
+
 ## [v0.4.4] - (28.02.21)
 
 ### Added
