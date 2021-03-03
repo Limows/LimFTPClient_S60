@@ -46,7 +46,21 @@ InstalledForm::~InstalledForm()
 
 void InstalledForm::on_DeleteAction_triggered()
 {
+    SystemHelper *UninstallHelper = new SystemHelper();
+    uint AppUid = 0;
+    QString AppName = ui->InstalledListWidget->currentItem()->text();
 
+    if (!AppName.isNull() && !AppName.isEmpty())
+    {
+        connect(UninstallHelper, SIGNAL(done(bool)), this, SLOT(on_Uninstalling_Complete(bool)));
+
+        AppUid = this->InstalledMap.value(AppName);
+        UninstallHelper->AppUninstall(AppUid);
+    }
+    else
+    {
+        QMessageBox::warning(this, tr("Предупреждение"), tr("Приложение не выбрано"), QMessageBox::Ok);
+    }
 }
 
 void InstalledForm::on_PropAction_triggered()
@@ -75,4 +89,12 @@ void InstalledForm::InitComponents()
     ui->setupUi(this);
 
     InitLayout(FormRect);
+}
+
+void InstalledForm::on_Uninstalling_Complete(bool IsError)
+{
+    if (IsError)
+    {
+        QMessageBox::critical(this, tr("Ошибка"), tr("Не удалось удалить приложение"), QMessageBox::Ok);
+    }
 }

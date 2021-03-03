@@ -35,7 +35,7 @@ AppDialog::AppDialog(QString CurrentAppName, QWidget *parent) :
     LogoName = AppInfo.at(2);
     ScrShotName = AppInfo.at(3);
 
-    if (FileSize.isNull() && FileSize.isEmpty())
+    if (FileSize.isNull() || FileSize.isEmpty())
     {
         ui->SizeLabel->setText(tr("0 МБ"));
     }
@@ -44,7 +44,7 @@ AppDialog::AppDialog(QString CurrentAppName, QWidget *parent) :
         ui->SizeLabel->setText(FileSize);
     }
 
-    if (InfoName.isNull() && InfoName.isEmpty())
+    if (InfoName.isNull() || InfoName.isEmpty())
     {
         ui->DescriptionBox->setText(tr("Для этого приложения ещё нет описания"));
     }
@@ -55,7 +55,7 @@ AppDialog::AppDialog(QString CurrentAppName, QWidget *parent) :
 
     QGraphicsScene *Scene = new QGraphicsScene;
 
-    if (LogoName.isNull() && LogoName.isEmpty())
+    if (LogoName.isNull() || LogoName.isEmpty())
     {
         Scene->addPixmap(QPixmap(":/images/NoIMG.png"));
     }
@@ -139,7 +139,6 @@ void AppDialog::on_Extracting_Complete(bool IsError, QString ExtractedFilePath)
         this->setCursor(Qt::ArrowCursor);
         ui->StatusLabel->setText(tr("Ошибка при распаковке"));
     }
-
 }
 
 void AppDialog::on_Installing_Complete(bool IsError)

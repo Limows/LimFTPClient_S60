@@ -9,6 +9,7 @@
 #include <QAction>
 #include <QTextCodec>
 #include <QDesktopWidget>
+#include <QMessageBox>
 #include <QMap>
 
 namespace Ui {
@@ -45,6 +46,8 @@ private slots:
     void on_DeleteAction_triggered();
 
     void on_PropAction_triggered();
+
+    void on_Uninstalling_Complete(bool IsError);
 };
 
 #endif // INSTALLEDFORM_H
