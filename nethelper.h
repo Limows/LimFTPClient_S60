@@ -46,6 +46,9 @@ public:
 
     void GetUpdates(QString Source);
 
+ private:
+    double GetFileSize(QUrl URI, QString FileName);
+
 signals:
     void done(bool IsError);
 

@@ -140,3 +140,18 @@ void NetHelper::HttpCommandFinished(const int Id, const bool IsError)
 {
 
 }
+
+double NetHelper::GetFileSize(QUrl URI, QString FileName)
+{
+    QEventLoop pause;
+    QString FilePath = URI.path() + "/" + FileName;
+
+    connect(this->Ftp, SIGNAL(done(bool)), &pause, SLOT(quit()));
+
+    this->Ftp->rawCommand("SIZE " + FilePath);
+    this->Ftp->close();
+
+    pause.exec();
+
+    return 0;
+}
