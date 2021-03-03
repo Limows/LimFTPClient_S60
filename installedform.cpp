@@ -9,19 +9,21 @@ InstalledForm::InstalledForm(QWidget *parent) :
 
     QTextCodec::setCodecForTr(QTextCodec::codecForName("Windows-1251"));
 
+    QMenu* Menu = new QMenu(this);
+
+    Menu->addAction(tr("Удалить"), this, SLOT(on_DeleteAction_triggered()));
+    Menu->addAction(tr("Свойства"), this, SLOT(on_PropAction_triggered()));
+
     QAction *RightOption = new QAction("Exit", this);
+    RightOption->setMenu(Menu);
     RightOption->setSoftKeyRole(QAction::NegativeSoftKey);
     QObject::connect(RightOption, SIGNAL(triggered()), this, SLOT(close()));
+    this->addAction(RightOption);
 
-    QAction *LeftOption = new QAction(tr("Удалить"), this);
+    QAction *LeftOption = new QAction("Options", this);
+    LeftOption->setMenu(Menu);
     LeftOption->setSoftKeyRole(QAction::PositiveSoftKey);
-    QObject::connect(LeftOption, SIGNAL(triggered()), this, SLOT(on_DeleteAction_triggered()));
-
-    QList<QAction*> ActionsList = QList<QAction*>();
-    ActionsList.append(RightOption);
-    ActionsList.append(LeftOption);
-
-    this->addActions(ActionsList);
+    this->addAction(LeftOption);
 
     ui->MemLabel->setText(tr("Доступно памяти: ") + QString::number(ParamsHelper::BytesToMegs(SystemHelper::GetStorageSpace(ParamsHelper::InstallPath))) + tr(" МБ"));
 

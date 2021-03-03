@@ -10,6 +10,7 @@
 #include <QTextCodec>
 #include <QDesktopWidget>
 #include <QMessageBox>
+#include <QMenu>
 #include <QMap>
 
 namespace Ui {

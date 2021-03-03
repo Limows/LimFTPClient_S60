@@ -91,7 +91,16 @@ void SystemHelper::AppUninstall(uint AppUid)
     OptionsPckg = Options;
 
     Uninstaller.Connect();
-    Error = Uninstaller.SilentUninstall(TUid::Uid(AppUid), OptionsPckg, SwiUI::KSisMimeType());
+
+    if (ParamsHelper::IsAutoInstall)
+    {
+        Error = Uninstaller.SilentUninstall(TUid::Uid(AppUid), OptionsPckg, SwiUI::KSisMimeType());
+    }
+    else
+    {
+        Error = Uninstaller.Uninstall(TUid::Uid(AppUid), SwiUI::KSisxMimeType());
+    }
+
     Uninstaller.Close();
 
     if (Error == 0)
