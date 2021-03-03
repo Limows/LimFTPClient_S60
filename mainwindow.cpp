@@ -153,6 +153,10 @@ void MainWindow::on_UpdateAction_triggered()
                 {
                     QMessageBox::critical(this, tr("Ошибка"), tr("Не удалось загрузить обновление"), QMessageBox::Ok);
                 }
+
+                SystemHelper *InstallHelper = new SystemHelper();
+
+                InstallHelper->UpdateInstall(ParamsHelper::DownloadPath + QDir::separator() + "Update.sis");
             }
             else
             {
@@ -162,7 +166,7 @@ void MainWindow::on_UpdateAction_triggered()
     }
     else
     {
-        QMessageBox::information(this, tr("Сообщение"), tr("Последняя версия"), QMessageBox::Ok);
+        QMessageBox::information(this, tr("Сообщение"), tr("Обновление не требуется"), QMessageBox::Ok);
     }
 }
 

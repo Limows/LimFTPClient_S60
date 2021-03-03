@@ -99,4 +99,21 @@ void InstalledForm::on_Uninstalling_Complete(bool IsError)
     {
         QMessageBox::critical(this, tr("Ошибка"), tr("Не удалось удалить приложение"), QMessageBox::Ok);
     }
+    else
+    {
+        this->InstalledMap = SystemHelper::GetInstalledApps();
+
+        if (!this->InstalledMap.isEmpty())
+        {
+            int i = 0;
+
+            ui->InstalledListWidget->clear();
+
+            foreach (QString app_name, InstalledMap.keys())
+            {
+                ui->InstalledListWidget->insertItem(i, app_name);
+                i++;
+            }
+        }
+    }
 }

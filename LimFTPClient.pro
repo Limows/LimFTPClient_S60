@@ -31,9 +31,9 @@ symbian {
         core \
         gui
 
-    VERSION = "0.5.2"
+    VERSION = "0.5.3"
 
-    DEFINES += APP_VERSION=\"\\\"$${VERSION}\\\"\"
+    DEFINES += APP_VERSION=\"\\\"$${VERSION}-debug\\\"\"
 
     VENDOR = "LimSoft"
 

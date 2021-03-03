@@ -22,6 +22,7 @@
 #include <QRect>
 #include <QDesktopServices>
 #include <QMap>
+#include <QProcess>
 
 class SystemHelper : public QObject
 {
@@ -35,6 +36,8 @@ public:
     static QString GetInstallDir(uint AppUid);
 
     void AppInstall(QString AppPath, QString InstallPath, bool Overwrite);
+
+    void UpdateInstall(QString UpdatePath);
 
     void AppUninstall(uint AppUid);
 

@@ -94,11 +94,21 @@ void SystemHelper::AppUninstall(uint AppUid)
 
     if (ParamsHelper::IsAutoInstall)
     {
-        Error = Uninstaller.SilentUninstall(TUid::Uid(AppUid), OptionsPckg, SwiUI::KSisMimeType());
+        Error = Uninstaller.SilentUninstall(TUid::Uid(AppUid), OptionsPckg, SwiUI::KSisxMimeType());
     }
     else
     {
         Error = Uninstaller.Uninstall(TUid::Uid(AppUid), SwiUI::KSisxMimeType());
+
+        if (Error != 0)
+        {
+            Error = Uninstaller.Uninstall(TUid::Uid(AppUid), SwiUI::KSisMimeType());
+
+            if (Error != 0)
+            {
+                Error = Uninstaller.Uninstall(TUid::Uid(AppUid), SwiUI::KJarxMIMEType);
+            }
+        }
     }
 
     Uninstaller.Close();
@@ -257,4 +267,13 @@ QMap<QString, uint> SystemHelper::GetInstalledApps()
         }
     }
     return InstalledMap;
+}
+
+void SystemHelper::UpdateInstall(QString UpdatePath)
+{
+    QProcess *Install = new QProcess(this);
+
+    UpdatePath = UpdatePath.replace("/", "\\");
+    Install->startDetached("\"" + UpdatePath + "\"");
+    //QDesktopServices::openUrl(QUrl("file:///" + UpdatePath));
 }
