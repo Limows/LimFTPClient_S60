@@ -243,15 +243,15 @@ QMap<QString, uint> SystemHelper::GetInstalledApps()
         while (AppListSession.GetNextApp(AppInfo) == 0)
         {
             TApaAppCapabilityBuf CapabilityBuf;
+            TApaAppCapability Capability;
+            QString AppName = QString::fromUtf16(AppInfo.iCaption.Ptr(), AppInfo.iCaption.Length());
 
             AppListSession.GetAppCapability(CapabilityBuf, AppInfo.iUid);
+            Capability = CapabilityBuf();
+            AppName = AppName.trimmed();
 
-            TApaAppCapability Capability = CapabilityBuf();
-
-            if (AppInfo.iCaption.Length() > 0 && !Capability.iAppIsHidden)
+            if (AppName.length() > 0 && !Capability.iAppIsHidden)
             {
-                QString AppName = QString::fromUtf16(AppInfo.iCaption.Ptr(), AppInfo.iCaption.Length());
-
                 InstalledMap.insert(AppName, (uint)AppInfo.iUid.iUid);
             }
         }
