@@ -2227,7 +2227,10 @@
      </spacer>
     </item>
     <item row="5" column="1" colspan="3">
-     <widget class="QTextEdit" name="textEdit">
+     <widget class="QTextEdit" name="DescriptionBox">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="palette">
        <palette>
         <active>
@@ -2508,9 +2511,9 @@
          <colorrole role="WindowText">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>127</red>
-            <green>127</green>
-            <blue>127</blue>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
            </color>
           </brush>
          </colorrole>
@@ -2562,9 +2565,9 @@
          <colorrole role="Text">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>127</red>
-            <green>127</green>
-            <blue>127</blue>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
            </color>
           </brush>
          </colorrole>
@@ -2580,9 +2583,9 @@
          <colorrole role="ButtonText">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>127</red>
-            <green>127</green>
-            <blue>127</blue>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
            </color>
           </brush>
          </colorrole>

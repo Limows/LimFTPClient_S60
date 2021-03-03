@@ -27,9 +27,8 @@ symbian {
     RC_FILE += \
         Resources.rc
 
-    QT += \
+    QT += network \
         core \
-        network \
         gui
 
     VERSION = "0.5.1"

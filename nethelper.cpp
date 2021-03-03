@@ -46,9 +46,14 @@ void NetHelper::DownloadFile(QString DownloadDir, QString FileName)
     this->Ftp->close();
 }
 
-QString NetHelper::LoadInfo(QString AppName)
+QList<QString> NetHelper::LoadInfo(QString AppName)
 {
-
+    QList<QString> AppInfo = QList<QString>();
+    AppInfo.append(QString());
+    AppInfo.append(QString());
+    AppInfo.append(QString());
+    AppInfo.append(QString());
+    return AppInfo;
 }
 
 void NetHelper::ReadListing()

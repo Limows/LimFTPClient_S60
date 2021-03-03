@@ -183,7 +183,9 @@ void MainWindow::on_Listing_Complete(bool IsError)
 {
     if (!IsError)
     {
-        for (int i = 0; i < ParamsHelper::AppsList.length(); i++)
+        int n = ParamsHelper::AppsList.length();
+
+        for (int i = 0; i < n; i++)
         {
             ui->AppsListWidget->insertItem(i, ParamsHelper::AppsList[i]);
         }

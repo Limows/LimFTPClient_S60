@@ -1432,7 +1432,7 @@
          <item row="2" column="0">
           <widget class="QCheckBox" name="AutoInstallBox">
            <property name="text">
-            <string>Автоматическая установка</string>
+            <string>Тихая установка</string>
            </property>
           </widget>
          </item>

@@ -38,7 +38,7 @@ public:
 
     void DownloadFile(QString DownloadDir, QString FileName);
 
-    QString LoadInfo(QString AppName);
+    QList<QString> LoadInfo(QString AppName);
 
     void ReadListing();
 

@@ -18,6 +18,54 @@ AppDialog::AppDialog(QString CurrentAppName, QWidget *parent) :
     this->AppName = CurrentAppName.replace(' ', '_');
 
     ParamsHelper::AppURI = QUrl(ParamsHelper::SystemURI.toString() + "/" + this->AppName);
+
+    QString FileSize;
+    QString InfoName;
+    QString LogoName;
+    QString ScrShotName;
+    QList<QString> AppInfo;
+
+    ParamsHelper::CurrentURI = ParamsHelper::AppURI;
+    NetHelper *FtpNetHelper = new NetHelper(ParamsHelper::CurrentURI);
+
+    AppInfo = FtpNetHelper->LoadInfo(this->AppName);
+
+    FileSize = AppInfo.at(0);
+    InfoName = AppInfo.at(1);
+    LogoName = AppInfo.at(2);
+    ScrShotName = AppInfo.at(3);
+
+    if (FileSize.isNull() && FileSize.isEmpty())
+    {
+        ui->SizeLabel->setText(tr("0 МБ"));
+    }
+    else
+    {
+        ui->SizeLabel->setText(FileSize);
+    }
+
+    if (InfoName.isNull() && InfoName.isEmpty())
+    {
+        ui->DescriptionBox->setText(tr("Для этого приложения ещё нет описания"));
+    }
+    else
+    {
+        ui->DescriptionBox->setText(InfoName);
+    }
+
+    QGraphicsScene *Scene = new QGraphicsScene;
+
+    if (LogoName.isNull() && LogoName.isEmpty())
+    {
+        Scene->addPixmap(QPixmap(":/images/NoIMG.png"));
+    }
+    else
+    {
+        Scene->addPixmap(QPixmap(LogoName));
+    }
+
+    ui->LogoView->setScene(Scene);
+    ui->LogoView->show();
 }
 
 AppDialog::~AppDialog()
@@ -53,29 +101,14 @@ void AppDialog::on_Downloading_Complete(bool IsError)
         ui->StatusLabel->setText(tr("Успешно загружено"));
         this->setCursor(Qt::ArrowCursor);
 
-        QMessageBox::StandardButton Result;
+        this->setCursor(Qt::WaitCursor);
+        ui->StatusLabel->setText(tr("Идёт распаковка"));
 
-        //if (!ParamsHelper::IsAutoInstall)
-        //{
-        //    Result = QMessageBox::question(this, tr("Сообщение"), tr("Установить?"), QMessageBox::Yes|QMessageBox::No);
-        //}
-        //else
-        //{
-            Result = QMessageBox::Yes;
-        //}
+        IOHelper *ZipHelper = new IOHelper();
 
-        if (Result == QMessageBox::Yes)
-        {
+        connect(ZipHelper, SIGNAL(unzip_done(bool, QString)), this, SLOT(on_Extracting_Complete(bool, QString)));
 
-            this->setCursor(Qt::WaitCursor);
-            ui->StatusLabel->setText(tr("Идёт распаковка"));
-
-            IOHelper *ZipHelper = new IOHelper();
-
-            connect(ZipHelper, SIGNAL(unzip_done(bool, QString)), this, SLOT(on_Extracting_Complete(bool, QString)));
-
-            ZipHelper->ExtractToDirectory(ParamsHelper::DownloadPath + QDir::separator() + this->AppName + ".zip", ParamsHelper::DownloadPath + QDir::separator() + this->AppName);
-        }
+        ZipHelper->ExtractToDirectory(ParamsHelper::DownloadPath + QDir::separator() + this->AppName + ".zip", ParamsHelper::DownloadPath + QDir::separator() + this->AppName);
     }
     else
     {

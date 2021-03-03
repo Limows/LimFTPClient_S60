@@ -4,6 +4,9 @@
 #include "f32file.h"
 #include "e32const.h"
 #include "paramshelper.h"
+#include "SWInstApi.h"
+#include "SWInstDefs.h"
+#include "apgcli.h"
 
 #include <QString>
 #include <QList>
@@ -18,8 +21,7 @@
 #include <QDesktopWidget>
 #include <QRect>
 #include <QDesktopServices>
-#include <SWInstApi.h>
-#include <SWInstDefs.h>
+#include <QMap>
 
 class SystemHelper : public QObject
 {
@@ -28,13 +30,13 @@ class SystemHelper : public QObject
 public:
     SystemHelper();
 
-    static QList<QString> GetInstalledApps();
+    static QMap<QString, uint> GetInstalledApps();
 
-    static QString GetInstallDir(QString AppName);
+    static QString GetInstallDir(uint AppUid);
 
-    void AppInstall(QString AppPath, QString InstallPath, QString AppName, bool Overwrite);
+    void AppInstall(QString AppPath, QString InstallPath, bool Overwrite);
 
-    void AppUninstall(QString AppName);
+    void AppUninstall(uint AppUid);
 
     static ulong GetStorageSpace(QString Path);
 
