@@ -1,5 +1,22 @@
 # Changelog
 
+## [v0.5.2] - (03.03.21)
+
+### Added
+
+ - GetFileSize function (testing)
+ - Listing of installed apps
+
+### Changed
+
+ - GetInstalledApps function update
+ - UI update
+	
+### Fixed
+
+ - Installed Form menu
+ - Listing apps speed improvement
+
 ## [v0.5.0] - (02.03.21)
 
 ### Added
@@ -14,7 +31,7 @@
 
  - Dumb errors
 
-## [v0.4.4] - (28.02.21)
+## [v0.4.5] - (28.02.21)
 
 ### Added
 
@@ -29,15 +46,6 @@
  - Some dumb errors
  - Layout
  - Rotation handling (mostly)
-
-## [v0.4.4] - (26.02.21)
-
-### Added
-
-### Changed
-	
-### Fixed
-
  - Critical fix of install path
 
 ## [v0.4.3] - (25.02.21)
@@ -116,6 +124,10 @@
 
  - Initial release
 
+[v0.5.2]: https://github.com/Limows/LimFTPClient_S60/releases/tag/v0.5.2
+[v0.5.0]: https://github.com/Limows/LimFTPClient_S60/releases/tag/v0.5.0
+[v0.4.5]: https://github.com/Limows/LimFTPClient_S60/releases/tag/v0.4.5
+[v0.4.3]: https://github.com/Limows/LimFTPClient_S60/releases/tag/v0.4.3
 [v0.4.2]: https://github.com/Limows/LimFTPClient_S60/releases/tag/v0.4.2
 [v0.4.0]: https://github.com/Limows/LimFTPClient_S60/releases/tag/v0.4.0
 [v0.3.2]: https://github.com/Limows/LimFTPClient_S60/releases/tag/v0.3.2

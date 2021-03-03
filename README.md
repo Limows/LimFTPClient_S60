@@ -40,9 +40,13 @@ You need the following stuff to install this program:
 ## Supported functions
 
  - Listing available for device applications
+ - App page contains description and logo
  - Downloading app package
- - Unpacking package
- - Installing package
+ - Unpacking and installing package
+ - Listing installed on device applications
+ - Watching application properties
+ - Uninstalling application
+ - Displaying free space in the installation folder
  
 ## OS Support
 
