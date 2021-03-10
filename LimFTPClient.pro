@@ -57,7 +57,10 @@ symbian {
         -lcommdb \
         -lapparc \
         -lefsrv \
-        -lapgrfx
+        -lapgrfx \
+        -lefsrv \
+        -lestor \
+        -lcharconv \
 }
 
 SOURCES += \
@@ -70,7 +73,8 @@ SOURCES += \
     iohelper.cpp \
     systemhelper.cpp \
     appdialog.cpp \
-    installedform.cpp
+    installedform.cpp \
+    logger.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -81,7 +85,8 @@ HEADERS += \
     iohelper.h \
     systemhelper.h \
     appdialog.h \
-    installedform.h
+    installedform.h \
+    logger.h
 
 FORMS += \
     mainwindow.ui \
@@ -92,6 +97,8 @@ FORMS += \
 
 RESOURCES += \
     Resources.rc
+
+DEFINES += LOGGING_ENABLED=1
 
 # Please do not modify the following two lines. Required for deployment.
 include(deployment.pri)

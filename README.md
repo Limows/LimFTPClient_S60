@@ -56,7 +56,8 @@ You need the following stuff to install this program:
  
 ## Used projects
 
- - QuaZip (version 0.5)
+ - [QuaZip] (version 0.5)
+ - [s60-logger]
 
 ## Tested devices
 
@@ -78,3 +79,4 @@ This project is licensed under the terms of the [2-Clause BSD License](https://o
 
 [QuaZip]: https://github.com/stachenov/quazip/tree/936844eb691491f7a9cbfd842a4326b9d384441f
 [Pack]: https://mega.nz/#!mhEjlBKJ!pKUWIST8yH55kvJT-gVNxN6JTWsi4cRjhzNm1Si46pA
+[s60-logger]: https://github.com/artem78/s60-logger

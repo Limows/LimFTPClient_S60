@@ -7,6 +7,7 @@
 #include "SWInstApi.h"
 #include "SWInstDefs.h"
 #include "apgcli.h"
+#include "logger.h"
 
 #include <QString>
 #include <QList>
@@ -48,6 +49,8 @@ public:
     static void GetSystemInfo();
 
     static QRect* GetScreenRect();
+
+    void WriteLog(QString LogString);
 
 signals:
     void done(bool IsError);
